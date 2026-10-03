@@ -27,17 +27,29 @@
      colours competing with each other, which is a large part of why they read
      as unprofessional. The platform allows exactly these roles. */
 
-  /* Primary — green. Main actions, active states, links, brand presence. */
-  --color-primary-50: #eef7f2;
-  --color-primary-100: #d4ebdf;
-  --color-primary-200: #a9d7bf;
-  --color-primary-300: #74bd98;
-  --color-primary-400: #459d75;
-  --color-primary-500: #1f7a52; /* the primary */
-  --color-primary-600: #186342;
-  --color-primary-700: #134e34;
-  --color-primary-800: #0e3a27;
-  --color-primary-900: #09271b;
+  /* Primary — green. Main actions, active states, links, brand presence.
+     Placeholder direction: "sporty modern green" (Hussain, Oct 2026), pending
+     the real brand values.
+
+     USAGE RULE, measured not guessed:
+       - primary-500 is for FILLS with white text on them (4.56:1 — clears
+         WCAG AA).
+       - For green TEXT on a page or card background, use primary-600 or
+         primary-700. primary-500 as text only reaches 4.21:1 on the page
+         background, which fails AA.
+       - Do not brighten primary-500 to make it sportier. The next step up
+         (#10a06a) drops white text to 3.36:1 and fails. This green is already
+         at the bright end of what stays accessible. */
+  --color-primary-50: #e9f8f0;
+  --color-primary-100: #c7ecd9;
+  --color-primary-200: #92dcb8;
+  --color-primary-300: #55c693;
+  --color-primary-400: #1ead72;
+  --color-primary-500: #0a8754; /* the primary */
+  --color-primary-600: #076e44;
+  --color-primary-700: #065737;
+  --color-primary-800: #054129;
+  --color-primary-900: #042c1c;
 
   /* Accent — gold. Premium highlight, selected emphasis, small celebratory
      moments. Never a large fill. */
@@ -74,6 +86,11 @@
      Note: the attention orange sits close to the warning tone. Warning is
      deliberately pushed amber and must always carry an icon and a word, never
      colour alone — see the hard rule below. */
+  /* NOTE for Phase 2: success green and the brand primary are currently very
+     close (1.16:1 apart — near-identical to the eye). Separate them when the
+     real brand values land, so "this is a brand element" never reads as "this
+     succeeded". Until then the hard rule below is what prevents confusion:
+     status always carries an icon and a word, never colour alone. */
   --color-success-500: #1f7a52;
   --color-success-50: #eef7f2;
   --color-warning-500: #b4820c;
