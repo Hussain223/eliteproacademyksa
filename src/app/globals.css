@@ -1,131 +1,135 @@
 @import 'tailwindcss';
 
 /* ===========================================================================
-   DESIGN TOKENS
-   ---------------------------------------------------------------------------
+   DESIGN TOKENS — FROZEN from the client-approved direction.
+
+   Direction C · "Family" was approved by the client on 3 Oct 2026 (Phase 1 of
+   docs/build-plan.md). These are no longer placeholders: warm ground, soft
+   green, rounded corners, one typeface across both scripts.
+
    Every colour, size and radius in the platform is named here and nowhere
-   else. Screens reference the names; they never hardcode a value.
+   else. Screens reference the names; they never hardcode a value. A future
+   rebrand is a change to this file, not a search across the codebase.
 
-   Why: when the client approves a visual direction in Phase 1 — or rebrands in
-   three years — we change these values once and the whole platform follows.
-   Without this, a rebrand is a find-and-replace across hundreds of files.
+   STILL OUTSTANDING: the real Elite Pro logo (vector) and the academy's own
+   brand hex codes. When they arrive, the values below move to match them —
+   the token names do not change, so nothing built on top needs rewriting.
 
-   !!!  THE COLOUR VALUES BELOW ARE PLACEHOLDERS.  !!!
-   They are the right *roles* (green primary, gold accent, navy neutral, orange
-   attention) with provisional hex values, chosen so the scaffold is visible and
-   legible. They are NOT the Elite Pro brand colours.
-
-   Replaced in Phase 2, once (a) Hussain supplies the real brand values and
-   (b) the client approves a direction in Phase 1. Until then, nothing built on
-   top of these is a finished design.
-   See /docs/design-system.md.
+   Contrast was measured, not estimated. Every ratio quoted below is against
+   the page background (--color-bg) or a card (--color-surface), to the
+   WCAG 2.2 AA bar named in docs/design-system.md.
    =========================================================================== */
 
 @theme {
-  /* --- Brand: one primary, one accent, one deep neutral, one attention ---
-     Discipline matters here. The academy's print materials used four loud
-     colours competing with each other, which is a large part of why they read
-     as unprofessional. The platform allows exactly these roles. */
+  /* --- Ground and surfaces ---------------------------------------------- */
+  --color-bg: #fdf8f0; /* the warm page ground — direction C's signature */
+  --color-surface: #ffffff; /* cards sit on the ground */
+  --color-surface-2: #f8efe2; /* insets, track backgrounds, hover */
+  --color-line: #ece1d1; /* ordinary borders — decorative, low contrast */
+  --color-line-strong: #d9c9b0; /* borders that need to be noticed */
 
-  /* Primary — green. Main actions, active states, links, brand presence.
-     Placeholder direction: "sporty modern green" (Hussain, Oct 2026), pending
-     the real brand values.
+  /* --- Primary · green --------------------------------------------------
+     Main actions, active states, links, brand presence.
+     USAGE: 500 is the lightest step safe for white text on a fill (5.28:1)
+     AND safe as text on the page (4.99:1). Both pass. Steps 600/700 are for
+     emphasis and hover. */
+  --color-primary-50: #eef6f1;
+  --color-primary-100: #d3e8dc;
+  --color-primary-200: #a8d1bb;
+  --color-primary-300: #74b495;
+  --color-primary-400: #44946f;
+  --color-primary-500: #277a4e;
+  --color-primary-600: #1f6340;
+  --color-primary-700: #194e33;
+  --color-primary-800: #133a26;
+  --color-primary-900: #0d271a;
 
-     USAGE RULE, measured not guessed:
-       - primary-500 is for FILLS with white text on them (4.56:1 — clears
-         WCAG AA).
-       - For green TEXT on a page or card background, use primary-600 or
-         primary-700. primary-500 as text only reaches 4.21:1 on the page
-         background, which fails AA.
-       - Do not brighten primary-500 to make it sportier. The next step up
-         (#10a06a) drops white text to 3.36:1 and fails. This green is already
-         at the bright end of what stays accessible. */
-  --color-primary-50: #e9f8f0;
-  --color-primary-100: #c7ecd9;
-  --color-primary-200: #92dcb8;
-  --color-primary-300: #55c693;
-  --color-primary-400: #1ead72;
-  --color-primary-500: #0a8754; /* the primary */
-  --color-primary-600: #076e44;
-  --color-primary-700: #065737;
-  --color-primary-800: #054129;
-  --color-primary-900: #042c1c;
+  /* --- Accent · gold ----------------------------------------------------
+     Premium highlight, selected emphasis, small celebratory moments.
 
-  /* Accent — gold. Premium highlight, selected emphasis, small celebratory
-     moments. Never a large fill. */
-  --color-accent-50: #fdf8ec;
-  --color-accent-100: #f8ecc9;
-  --color-accent-200: #f0d893;
-  --color-accent-300: #e5bf57;
-  --color-accent-400: #d4a62f;
-  --color-accent-500: #b78a1d; /* the accent */
-  --color-accent-600: #946e16;
-  --color-accent-700: #705313;
-  --color-accent-800: #4d390f;
-  --color-accent-900: #2e220a;
+     ⚠ MEASURED LIMIT — gold is the easiest token to misuse:
+       accent-500 as text  = 2.93:1  FAILS
+       accent-500 as a button fill with white text = 3.10:1  FAILS
+     So accent-500 is DECORATIVE ONLY: rules, dividers, an icon beside a
+     label, a thin highlight. For gold TEXT use accent-700 (6.53:1). Never
+     put white text on accent-500. */
+  --color-accent-50: #fdf6e7;
+  --color-accent-100: #f8e8c4;
+  --color-accent-200: #efd089;
+  --color-accent-300: #e0b254;
+  --color-accent-400: #d29a32;
+  --color-accent-500: #c4861f;
+  --color-accent-600: #9b6914;
+  --color-accent-700: #7a5210;
+  --color-accent-800: #573a0c;
+  --color-accent-900: #382505;
 
-  /* Neutral/depth — navy. Primary text, headers, depth. The workhorse dark. */
-  --color-ink-50: #f4f6f9;
-  --color-ink-100: #e4e9f0;
-  --color-ink-200: #c6d0de;
-  --color-ink-300: #97a7bd;
-  --color-ink-400: #647a98;
-  --color-ink-500: #44597a;
-  --color-ink-600: #324462;
-  --color-ink-700: #26344c;
-  --color-ink-800: #1a2435;
-  --color-ink-900: #111826; /* primary text */
+  /* --- Neutral · warm ink ----------------------------------------------
+     NOTE: docs/design-system.md originally specified navy as the deep
+     neutral. The approved direction uses a warm brown-grey instead, which is
+     what makes direction C read as warm rather than corporate. The doc
+     anticipated this ("lock these values to match the approved direction").
 
-  /* Attention — orange. ONE job: pull the eye to a single important thing.
-     A critical alert, or the one call-to-action in an empty state. Never
-     sprinkled around as a fourth brand colour. */
-  --color-attention-500: #d1601a;
-  --color-attention-600: #a94a12;
+     USAGE: ink-800 is body text. ink-500 is the lightest READABLE secondary
+     text (4.78:1). ink-400 measures 3.06:1 and FAILS as text — it is for
+     borders, dividers and disabled states only. */
+  --color-ink-50: #faf7f2;
+  --color-ink-100: #f1ece3;
+  --color-ink-200: #e2d9cb;
+  --color-ink-300: #c4b7a4;
+  --color-ink-400: #9c8d78;
+  --color-ink-500: #786d61;
+  --color-ink-600: #5c5349;
+  --color-ink-700: #473f37;
+  --color-ink-800: #3a332b;
+  --color-ink-900: #241f1a;
 
-  /* --- Semantic colours (separate from brand) ---
-     Note: the attention orange sits close to the warning tone. Warning is
-     deliberately pushed amber and must always carry an icon and a word, never
-     colour alone — see the hard rule below. */
-  /* NOTE for Phase 2: success green and the brand primary are currently very
-     close (1.16:1 apart — near-identical to the eye). Separate them when the
-     real brand values land, so "this is a brand element" never reads as "this
-     succeeded". Until then the hard rule below is what prevents confusion:
-     status always carries an icon and a word, never colour alone. */
-  --color-success-500: #1f7a52;
-  --color-success-50: #eef7f2;
-  --color-warning-500: #b4820c;
-  --color-warning-50: #fdf6e4;
-  --color-error-500: #c0392b;
-  --color-error-50: #fbeceb;
-  --color-info-500: #2c6fb5;
-  --color-info-50: #ebf3fb;
+  /* --- Attention · orange ----------------------------------------------
+     ONE job: pull the eye to a single important thing — a critical alert, or
+     the one call-to-action in an empty state. Never a fourth brand colour
+     sprinkled around.
+     MEASURED: attention-500 FAILS as text (4.25:1) and as a white-text fill
+     (4.49:1). Use it as a fill behind DARK text, or use attention-600 when
+     it must be text. */
+  --color-attention-50: #fdf0e7;
+  --color-attention-500: #c2571a;
+  --color-attention-600: #9c4414;
 
-  /* --- HARD RULE, written here so it is impossible to miss ---
-     NEVER communicate status by colour alone. A red dot is not enough; it is a
-     red dot AND the word "Absent". This is an accessibility requirement
-     (colour-blind users, screen readers) and a clarity one — an academy
-     employee should never have to learn what a colour means. */
+  /* --- Semantic colours -------------------------------------------------
+     Success deliberately uses the brand green rather than a second, slightly
+     different green — two near-identical greens read as a mistake. They are
+     kept as separate token names so they can be split later in one place.
 
-  /* --- Typography ---
-     One font system handling Arabic and English well, rather than per-component
-     fonts. PROVISIONAL: final family is tied to the approved Phase 1 direction.
-     Arabic needs more line-height than Latin at the same size to stay legible —
-     that is why the body leading is generous.
-     The two families are loaded in layout.tsx and exposed as
-     --font-latin and --font-arabic. Latin comes first so English text uses the
-     Latin face; Arabic glyphs fall through to the Arabic face automatically. */
-  --font-sans: var(--font-latin), var(--font-arabic), ui-sans-serif, system-ui,
-    sans-serif;
+     THE HARD RULE, which makes all of this safe:
+     NEVER communicate status by colour alone. A red dot is not enough; it is
+     a red dot AND the word "Absent". Every badge pairs an icon with a word.
+     This is an accessibility requirement and a clarity one — an academy
+     employee must never have to learn what a colour means. */
+  --color-success-50: #eef6f1;
+  --color-success-600: #1f6340;
+  --color-warning-50: #fdf3e0;
+  --color-warning-700: #8a5a06;
+  --color-error-50: #fceceb;
+  --color-error-600: #b3261e;
+  --color-info-50: #eaf3fa;
+  --color-info-600: #1c5f94;
 
-  /* --- Radius: one personality, held consistently --- */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.875rem;
+  /* --- Typography -------------------------------------------------------
+     ONE family across both scripts. Rubik ships a genuine Arabic subset
+     (verified against Google Fonts' own CSS, Oct 2026), so Arabic and English
+     share a single voice instead of two families pretending to match.
+     Loaded in layout.tsx and exposed as --font-rubik. */
+  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
 
-  /* --- Shadow: restrained. The print work drowned in drop shadows; the
-         platform stays flatter and calmer. --- */
-  --shadow-card: 0 1px 2px rgb(17 24 38 / 0.06), 0 1px 3px rgb(17 24 38 / 0.04);
-  --shadow-raised: 0 4px 12px rgb(17 24 38 / 0.08);
+  /* --- Radius — rounded is direction C's personality. Hold it. --------- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  /* --- Shadow — soft and warm-tinted, never grey-black. Restrained: the
+         academy's print work drowned in drop shadows. --------------------- */
+  --shadow-card: 0 1px 2px rgb(118 96 66 / 0.07), 0 2px 8px rgb(118 96 66 / 0.07);
+  --shadow-raised: 0 6px 20px rgb(118 96 66 / 0.14);
 }
 
 /* ===========================================================================
@@ -137,16 +141,22 @@
 }
 
 body {
-  background-color: var(--color-ink-50);
-  color: var(--color-ink-900);
+  background-color: var(--color-bg);
+  color: var(--color-ink-800);
   font-family: var(--font-sans);
-  /* Arabic needs room to breathe. */
-  line-height: 1.65;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
+/* Arabic needs more room between lines than Latin at the same size, or it
+   reads as cramped — the ascenders and descenders are taller. Verified by
+   rendering real Arabic in Rubik rather than assuming. */
+:lang(ar) {
+  line-height: 1.85;
+}
+
 /* The page itself must never scroll sideways — a WCAG 2.2 reflow requirement.
-   Wide things (a data table) scroll inside their own container instead. */
+   Wide things (a roster table) scroll inside their own container instead. */
 img,
 video,
 svg {
@@ -154,7 +164,9 @@ svg {
   height: auto;
 }
 
-/* Keyboard users must always be able to see where they are. */
+/* Keyboard users must always be able to see where they are.
+   primary-500 measures 4.99:1 against the page, well past the 3:1 the focus
+   indicator needs. */
 :focus-visible {
   outline: 2px solid var(--color-primary-500);
   outline-offset: 2px;

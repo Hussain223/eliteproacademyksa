@@ -134,8 +134,16 @@ away for convenience.
   *(Corrected 2026-10-03: this section previously said the cohort model was parked
   and that attendance/scheduling were blocked on it. That was out of date — the
   other three docs already had it resolved.)*
-- **Phase 0 (foundations) is built** — see `README.md`. Phase 1 is next: branded
-  mockups for client sign-off.
+- **Phase 0 (foundations) is built** — see `README.md`.
+- **Phase 1 is complete. The client chose direction C · "Family"** (3 Oct 2026):
+  warm ground, soft green, rounded corners, Rubik across both scripts. Tokens are
+  **frozen** in `src/app/globals.css`; `/docs/design-system.md` is locked to match.
+  The mockups the decision came from: `/mockups/visual-directions.html`.
+  **The visual direction is now settled — build feature UI in this look.**
+- **Still outstanding from the client:** the real logo as a vector, and the
+  academy's brand hex codes. Token *values* swap when they arrive; token *names*
+  do not, so nothing built on top needs rewriting.
+- **Phase 2 is next:** the reusable component set and the app shell.
 - Three build-time sub-decisions are **deliberately postponed to their own phase**
   (Hussain, Oct 2026): siblings under one parent account, assessment score shape,
   and how session rows are generated. Each shapes a table — **surface them when the

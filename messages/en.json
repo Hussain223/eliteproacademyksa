@@ -22,7 +22,7 @@
     "directionLabel": "Current direction",
     "localeLabel": "Current language",
     "nextTitle": "What happens next",
-    "nextBody": "Phase 1: two or three branded mockup directions for the client to choose from. No feature is built until one is approved.",
-    "tokenWarning": "The colours on this page are placeholders, not the Elite Pro brand palette."
+    "nextBody": "Phase 2: turning the approved look into reusable building blocks and the app shell, so every screen after it is consistent and quick to build.",
+    "tokenWarning": "These are the approved colours — direction C, chosen by the client. The logo is still a stand-in until the vector file arrives."
   }
 }

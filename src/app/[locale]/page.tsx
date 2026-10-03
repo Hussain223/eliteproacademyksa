@@ -67,13 +67,13 @@ export default async function Phase0Page({
             {checks.map((check) => (
               <li
                 key={check}
-                className="flex items-start gap-3 rounded-md bg-white p-3 shadow-card"
+                className="flex items-start gap-3 rounded-md bg-surface p-3 shadow-card"
               >
                 {/* The tick is decorative — the sentence carries the meaning.
                     Status is never communicated by a symbol or colour alone. */}
                 <span
                   aria-hidden="true"
-                  className="mt-1 text-sm text-success-500"
+                  className="mt-1 text-sm text-success-600"
                 >
                   &#10003;
                 </span>
@@ -84,7 +84,7 @@ export default async function Phase0Page({
         </section>
 
         <section className="grid gap-3 sm:grid-cols-2">
-          <dl className="rounded-md bg-white p-4 shadow-card">
+          <dl className="rounded-md bg-surface p-4 shadow-card">
             <dt className="text-xs font-medium tracking-wide text-ink-400 uppercase">
               {t('localeLabel')}
             </dt>
@@ -93,7 +93,7 @@ export default async function Phase0Page({
               <span className="font-normal text-ink-400">({locale})</span>
             </dd>
           </dl>
-          <dl className="rounded-md bg-white p-4 shadow-card">
+          <dl className="rounded-md bg-surface p-4 shadow-card">
             <dt className="text-xs font-medium tracking-wide text-ink-400 uppercase">
               {t('directionLabel')}
             </dt>

@@ -2,30 +2,24 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { IBM_Plex_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 
 import { directionOf, routing, type Locale } from '@/i18n/routing';
 import '../globals.css';
 
 /**
- * PROVISIONAL TYPEFACES.
+ * The typeface, fixed by the client-approved direction (Phase 1, 3 Oct 2026).
  *
- * design-system.md calls for one font system that handles Arabic and English
- * well, with the final choice tied to the Phase 1 approved direction. IBM Plex
- * has matched Latin and Arabic families, so the pair holds together while we
- * wait — but treat it as a placeholder, not a decision.
+ * One family covering BOTH scripts, which is what design-system.md asks for.
+ * Rubik ships a genuine Arabic subset, so Arabic and English share one voice
+ * rather than being two families chosen to resemble each other. Next.js loads
+ * only the glyphs each page needs, so carrying both scripts costs the visitor
+ * nothing extra.
  */
-const latin = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-latin',
-  display: 'swap',
-});
-
-const arabic = IBM_Plex_Sans_Arabic({
-  subsets: ['arabic'],
-  weight: ['400', '500', '600'],
-  variable: '--font-arabic',
+const rubik = Rubik({
+  subsets: ['latin', 'arabic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-rubik',
   display: 'swap',
 });
 
@@ -76,7 +70,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={directionOf(locale as Locale)}
-      className={`${latin.variable} ${arabic.variable}`}
+      className={rubik.variable}
     >
       <body className="min-h-dvh antialiased">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>

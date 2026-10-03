@@ -4,10 +4,38 @@ How the platform looks and behaves visually. This exists so screens are consiste
 and fast to build — define the system once, reuse it everywhere. **Do not style
 screens individually.**
 
-**Important:** the *exact* tokens below are a **starting direction**, not final.
-The final look is set by the client-approved mockup direction (Phase 1 of the build
-plan). Once that's chosen, lock these values to match it. Until then, build the
-mockups from this direction.
+**LOCKED — 3 October 2026.** The client approved **direction C · "Family"** in
+Phase 1. The mockups the decision was made from are in
+[`/mockups/visual-directions.html`](../mockups/visual-directions.html).
+
+The authoritative values now live in **`src/app/globals.css`** — that file is the
+single source of truth, and every ratio in it was measured rather than estimated.
+This document explains the *intent*; the CSS holds the numbers.
+
+What the approved direction changed from the starting direction below:
+
+- **The deep neutral is a warm brown-grey, not navy.** This is what makes the
+  platform read as warm rather than corporate, and it is the main reason the
+  client chose C. Where this document says "navy" below, read "warm ink".
+- **Corners are generously rounded** (10/16/22px), not tight.
+- **The ground is warm** (`#fdf8f0`), not white or grey.
+- **One typeface, Rubik, covers both Arabic and English** — a single family with
+  a genuine Arabic subset rather than two families chosen to resemble each other.
+  Arabic gets extra line-height (1.85 vs 1.6); verified by rendering real Arabic,
+  not assumed.
+
+Three measured limits that are easy to get wrong, all enforced by comment in the
+CSS:
+
+| Token | As text | As a white-text button | Therefore |
+|---|---|---|---|
+| `accent-500` (gold) | 2.93:1 ✗ | 3.10:1 ✗ | **Decorative only.** For gold text use `accent-700`. |
+| `attention-500` (orange) | 4.25:1 ✗ | 4.49:1 ✗ | Fill behind dark text, or `attention-600` for text. |
+| `ink-400` | 3.06:1 ✗ | — | Borders and disabled states only, never readable text. |
+
+**Still outstanding:** the real logo as a vector, and the academy's own brand hex
+codes. When they arrive the *values* move to match; the *token names* do not
+change, so nothing built on top needs rewriting.
 
 ---
 

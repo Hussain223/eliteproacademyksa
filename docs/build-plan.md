@@ -18,14 +18,15 @@ Two constraints shape the whole sequence:
 
 Goal: a running, deployable skeleton and the brand assets in order.
 
-- [ ] GitHub repo, branch-per-feature workflow, `main` auto-deploying to Vercel or
+- [x] GitHub repo, branch-per-feature workflow, `main` auto-deploying to Vercel or
       Cloudflare Pages (a blank app is fine — prove the pipeline).
-- [ ] React app scaffold, mobile-first, with the **i18n + RTL framework wired in
+- [x] React app scaffold (Next.js App Router), mobile-first, with the **i18n + RTL framework wired in
       from the first commit** (English and Arabic switch, direction flips). This is
       the one thing that must exist before any UI, because retrofitting it is the
       expensive mistake we're avoiding.
-- [ ] Supabase project created in the **UAE/Bahrain** region. No tables yet.
-- [ ] **Logo to vector.** The logo is currently raster only. Get the SVG from the
+- [ ] Supabase project created. **Region corrected:** managed Supabase has no
+      Middle East region, so Central EU (Frankfurt) was chosen. No tables yet.
+- [ ] **Logo to vector.** STILL OUTSTANDING — now blocking final brand values. The logo is currently raster only. Get the SVG from the
       original designer, or have it traced. Flag to Hussain — a crisp logo is a
       visible quality marker; a fuzzy one cheapens every screen.
 
@@ -40,7 +41,13 @@ Goal: the client approves *how the platform looks* before we build features. Thi
 is the answer to the biggest project risk. **No feature logic here — appearance
 only.**
 
-- [ ] **2–3 static mockup directions**, all "premium youth sports academy," anchored
+> **COMPLETE — 3 Oct 2026. The client chose direction C · "Family."**
+> Mockups: [`/mockups/visual-directions.html`](../mockups/visual-directions.html).
+> Tokens frozen into `src/app/globals.css`; `/docs/design-system.md` locked to match.
+> Caveat carried forward: the real logo and brand hex codes are still outstanding,
+> so the mockups used a stand-in mark. Values swap in Phase 2 without renaming tokens.
+
+- [x] **2–3 static mockup directions**, all "premium youth sports academy," anchored
       on the real Elite Pro logo and brand colours, differing in feel (e.g. clean-
       editorial / bold-athletic / warm-parent-friendly). Each shows the same three
       screens so the client compares like with like:
@@ -48,10 +55,10 @@ only.**
       - the **parent dashboard** (the most emotionally important screen — a parent
         must understand "how is my child doing?" in seconds),
       - one **management screen** (e.g. the children list/table).
-- [ ] Built as static, non-functional pages Hussain can open on phone and desktop
+- [x] Built as static, non-functional pages Hussain can open on phone and desktop
       and send to the client. Shown in **both Arabic and English** so RTL is judged,
       not assumed.
-- [ ] Client picks one direction.
+- [x] Client picks one direction. **→ direction C · "Family".**
 
 **Decision for Hussain / client:** which direction. This is *the* sign-off that
 protects everything downstream. Everything after Phase 2 inherits it.
@@ -65,9 +72,9 @@ protects everything downstream. Everything after Phase 2 inherits it.
 Goal: turn the approved direction into reusable foundations, so every later screen
 is consistent and fast to build.
 
-- [ ] Freeze design tokens from the approved direction (colours, type, spacing,
-      radius, shadows) — see `/docs/design-system.md`. Starting palette: **green
-      primary, gold accent, navy neutral, orange as a single attention colour.**
+- [x] Freeze design tokens from the approved direction (colours, type, spacing,
+      radius, shadows) — done 3 Oct 2026, in `src/app/globals.css`. Note the
+      approved direction uses a **warm ink** neutral, not navy.
 - [ ] Core reusable components: AppShell, Sidebar, MobileNavigation, TopBar,
       PageHeader, Button, Input, Select, Card, Badge, Modal, Drawer, Toast, Alert,
       Tabs, plus the state primitives **EmptyState, LoadingState/Skeleton,
