@@ -1,0 +1,931 @@
+<title>Elite Pro Academy Visual Directions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=Cairo:wght@400;600;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Lora:wght@500;600&family=Noto+Naskh+Arabic:wght@500;700&family=Rubik:wght@400;500;700&display=swap">
+
+<style>
+/* ===========================================================================
+   THE CHROME — deliberately neutral, deliberately single-theme.
+
+   This page is a colour-comparison tool. If the surround changed with the
+   viewer's light/dark setting, the three directions would be judged against
+   three different grounds and the comparison would be worthless. So the frame
+   commits to one neutral grey and paints every colour explicitly.
+   =========================================================================== */
+
+:root {
+  --chrome-bg: #e7e6e2;
+  --chrome-panel: #fdfdfc;
+  --chrome-ink: #22262b;
+  --chrome-ink-soft: #5d646c;
+  --chrome-line: #cfcdc7;
+  --chrome-active: #22262b;
+  color-scheme: light;
+}
+
+body {
+  background: var(--chrome-bg);
+  color: var(--chrome-ink);
+  font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+}
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 28px 64px;
+}
+
+.masthead { margin-bottom: 20px; }
+
+.masthead h1 {
+  font-size: clamp(21px, 3.4vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0 0 8px;
+  text-wrap: balance;
+}
+
+.masthead p {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--chrome-ink-soft);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+.notice {
+  margin-top: 14px;
+  padding: 11px 14px;
+  background: #fbf3e0;
+  border-inline-start: 3px solid #b8892a;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #4a3c1e;
+  border-radius: 3px;
+}
+
+/* --- controls --- */
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--chrome-bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-block: 1px solid var(--chrome-line);
+  padding-block: 12px;
+  margin-block: 22px 26px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 26px;
+  align-items: flex-end;
+}
+
+.control-group { display: flex; flex-direction: column; gap: 6px; max-width: 100%; min-width: 0; }
+
+.control-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--chrome-ink-soft);
+}
+
+.segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  background: #d8d7d2;
+  padding: 3px;
+  border-radius: 7px;
+  max-width: 100%;
+}
+
+.segmented button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border: 0;
+  background: transparent;
+  color: var(--chrome-ink-soft);
+  padding: 8px 13px;
+  min-height: 38px;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, color 0.15s;
+}
+
+.segmented button:hover { background: #e4e3df; color: var(--chrome-ink); }
+
+.segmented button[aria-pressed='true'] {
+  background: var(--chrome-active);
+  color: #fff;
+}
+
+.segmented button:focus-visible {
+  outline: 2px solid var(--chrome-active);
+  outline-offset: 2px;
+}
+
+/* --- direction summary --- */
+.direction-note {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  align-items: baseline;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--chrome-line);
+}
+
+.direction-note h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.direction-note p {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--chrome-ink-soft);
+  max-width: 62ch;
+  line-height: 1.55;
+}
+
+/* --- screen frames --- */
+.stage { display: flex; flex-wrap: wrap; gap: 26px; align-items: flex-start; }
+/* nowrap is load-bearing: a wrapping column flex container has no definite
+   height to wrap against, which stretches every block to several times the
+   height of the frame inside it. */
+.stage[data-device='desktop'] { flex-direction: column; flex-wrap: nowrap; }
+
+.screen-block { display: flex; flex-direction: column; gap: 9px; flex: 0 0 auto; }
+.stage[data-device='desktop'] .screen-block { width: 100%; }
+
+.screen-caption {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--chrome-ink-soft);
+}
+
+.frame {
+  background: var(--d-bg);
+  border: 1px solid var(--chrome-line);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.07);
+  container-type: inline-size;
+}
+
+.stage[data-device='phone'] .frame { width: 360px; max-width: 100%; }
+.stage[data-device='desktop'] .frame { width: 100%; }
+
+/* ===========================================================================
+   DIRECTION TOKENS
+   Each direction is a complete set of values. The three screens below are one
+   template — switching direction only swaps these variables, which is exactly
+   how the real platform will work once a direction is approved.
+   =========================================================================== */
+
+/* --- A · Composed (clean editorial) --- */
+[data-direction='a'] {
+  --d-bg: #fbfaf7;
+  --d-surface: #ffffff;
+  --d-surface-2: #f3f1ec;
+  --d-ink: #16202c;
+  --d-ink-soft: #5c6875;
+  --d-line: #e3dfd7;
+  --d-primary: #0a6b45;
+  --d-on-primary: #ffffff;
+  --d-accent: #a97f20;
+  --d-radius: 4px;
+  --d-radius-sm: 3px;
+  --d-shadow: 0 1px 2px rgb(22 32 44 / 0.05);
+  --d-font-display: 'Lora', Georgia, serif;
+  --d-font-body: 'IBM Plex Sans', ui-sans-serif, sans-serif;
+  --d-display-weight: 600;
+  --d-display-tracking: -0.008em;
+  --d-display-transform: none;
+  --d-label-transform: uppercase;
+  --d-label-tracking: 0.13em;
+  --d-pad: 18px;
+}
+
+[data-direction='a'][dir='rtl'] {
+  --d-font-display: 'Noto Naskh Arabic', serif;
+  --d-font-body: 'IBM Plex Sans Arabic', ui-sans-serif, sans-serif;
+}
+
+/* --- B · Performance (bold athletic) --- */
+[data-direction='b'] {
+  --d-bg: #0b131c;
+  --d-surface: #121e2a;
+  --d-surface-2: #1b2a38;
+  --d-ink: #f1f6f8;
+  --d-ink-soft: #94a8b8;
+  --d-line: #243542;
+  --d-primary: #10b26a;
+  --d-on-primary: #04140c;
+  --d-accent: #e8b63f;
+  --d-radius: 2px;
+  --d-radius-sm: 2px;
+  --d-shadow: 0 2px 14px rgb(0 0 0 / 0.4);
+  --d-font-display: 'Archivo', ui-sans-serif, sans-serif;
+  --d-font-body: 'Archivo', ui-sans-serif, sans-serif;
+  --d-display-weight: 800;
+  --d-display-tracking: -0.022em;
+  --d-display-transform: uppercase;
+  --d-label-transform: uppercase;
+  --d-label-tracking: 0.16em;
+  --d-pad: 16px;
+}
+
+[data-direction='b'][dir='rtl'] {
+  --d-font-display: 'Cairo', ui-sans-serif, sans-serif;
+  --d-font-body: 'Cairo', ui-sans-serif, sans-serif;
+  --d-display-weight: 900;
+  --d-display-transform: none;
+  --d-display-tracking: 0;
+}
+
+/* --- C · Family (warm, parent-friendly) --- */
+[data-direction='c'] {
+  --d-bg: #fdf8f0;
+  --d-surface: #ffffff;
+  --d-surface-2: #f8efe2;
+  --d-ink: #3a332b;
+  --d-ink-soft: #786d61;
+  --d-line: #ece1d1;
+  --d-primary: #277a4e;
+  --d-on-primary: #ffffff;
+  --d-accent: #c4861f;
+  --d-radius: 16px;
+  --d-radius-sm: 10px;
+  --d-shadow: 0 2px 8px rgb(118 96 66 / 0.1);
+  --d-font-display: 'Rubik', ui-sans-serif, sans-serif;
+  --d-font-body: 'Rubik', ui-sans-serif, sans-serif;
+  --d-display-weight: 700;
+  --d-display-tracking: -0.015em;
+  --d-display-transform: none;
+  --d-label-transform: none;
+  --d-label-tracking: 0.01em;
+  --d-pad: 18px;
+}
+
+/* ===========================================================================
+   THE MOCKUP COMPONENTS — one template, driven by the tokens above.
+   Logical properties throughout, so Arabic mirrors without a second layout.
+   =========================================================================== */
+
+.screen {
+  background: var(--d-bg);
+  color: var(--d-ink);
+  font-family: var(--d-font-body);
+  line-height: 1.6;
+  min-height: 260px;
+}
+
+.screen * { box-sizing: border-box; }
+
+.m-display {
+  font-family: var(--d-font-display);
+  font-weight: var(--d-display-weight);
+  letter-spacing: var(--d-display-tracking);
+  text-transform: var(--d-display-transform);
+  line-height: 1.18;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.m-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: var(--d-label-tracking);
+  text-transform: var(--d-label-transform);
+  color: var(--d-ink-soft);
+}
+
+.m-card {
+  background: var(--d-surface);
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-radius);
+  box-shadow: var(--d-shadow);
+  padding: var(--d-pad);
+}
+
+.m-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding-inline: 18px;
+  border-radius: var(--d-radius-sm);
+  background: var(--d-primary);
+  color: var(--d-on-primary);
+  font-family: var(--d-font-body);
+  font-weight: 600;
+  font-size: 14px;
+  border: 0;
+  width: 100%;
+  letter-spacing: 0.005em;
+}
+
+.m-btn--ghost {
+  background: transparent;
+  color: var(--d-primary);
+  border: 1px solid var(--d-primary);
+}
+
+.m-field { display: flex; flex-direction: column; gap: 6px; }
+
+.m-field label { font-size: 12.5px; font-weight: 500; color: var(--d-ink-soft); }
+
+.m-input {
+  min-height: 44px;
+  border: 1px solid var(--d-line);
+  border-radius: var(--d-radius-sm);
+  background: var(--d-surface);
+  padding-inline: 13px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--d-ink-soft);
+}
+
+/* brand mark */
+.m-mark { display: flex; align-items: center; gap: 11px; }
+.m-mark svg { width: 42px; height: 42px; flex: none; }
+.m-mark-name { font-family: var(--d-font-display); font-weight: var(--d-display-weight); font-size: 16px; letter-spacing: var(--d-display-tracking); line-height: 1.2; }
+.m-mark-tag { font-size: 11px; color: var(--d-ink-soft); line-height: 1.35; }
+
+/* ---------- screen 1: login ---------- */
+.s-login { padding: 26px var(--d-pad) 30px; display: flex; flex-direction: column; gap: 22px; }
+.s-login-head { display: flex; flex-direction: column; gap: 18px; }
+.s-login h2 { font-size: 23px; }
+.s-login-form { display: flex; flex-direction: column; gap: 13px; }
+.s-login-alt { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 12.5px; }
+.s-login-alt a { color: var(--d-primary); text-decoration: none; font-weight: 500; }
+.s-login-foot { border-top: 1px solid var(--d-line); padding-top: 14px; font-size: 11.5px; color: var(--d-ink-soft); }
+
+@container (min-width: 700px) {
+  .s-login { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; padding: 40px; align-items: center; }
+  .s-login-head { gap: 22px; }
+  .s-login h2 { font-size: 34px; }
+  .s-login-panel { grid-column: 2; }
+  .s-login-foot { grid-column: 1 / -1; }
+}
+
+/* ---------- screen 2: parent dashboard ---------- */
+.s-parent { padding: var(--d-pad); display: flex; flex-direction: column; gap: 14px; }
+
+.s-topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding-bottom: 13px; border-bottom: 1px solid var(--d-line);
+}
+.s-greet { font-size: 13px; color: var(--d-ink-soft); }
+.s-greet strong { display: block; color: var(--d-ink); font-size: 15px; font-weight: 600; }
+
+.s-child { display: flex; align-items: center; gap: 13px; }
+.s-avatar {
+  width: 52px; height: 52px; flex: none; border-radius: 50%;
+  background: var(--d-surface-2); border: 1px solid var(--d-line);
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 15px; color: var(--d-primary);
+}
+.s-child-name { font-family: var(--d-font-display); font-weight: var(--d-display-weight); font-size: 18px; letter-spacing: var(--d-display-tracking); line-height: 1.25; }
+.s-child-meta { font-size: 12.5px; color: var(--d-ink-soft); }
+
+.s-next { display: flex; flex-direction: column; gap: 7px; }
+.s-next-when { font-family: var(--d-font-display); font-weight: var(--d-display-weight); font-size: 17px; letter-spacing: var(--d-display-tracking); }
+.s-next-row { display: flex; gap: 7px; font-size: 12.5px; color: var(--d-ink-soft); }
+
+.s-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.s-stat { display: flex; flex-direction: column; gap: 3px; }
+.s-stat-value { font-family: var(--d-font-display); font-weight: var(--d-display-weight); font-size: 25px; letter-spacing: var(--d-display-tracking); line-height: 1; }
+.s-stat-sub { font-size: 11.5px; color: var(--d-ink-soft); }
+
+.s-progress { display: flex; flex-direction: column; gap: 11px; }
+.s-prog-row { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; align-items: center; }
+.s-prog-name { font-size: 13px; }
+.s-prog-score { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+/* display:block is load-bearing — these are spans, and height is ignored on
+   inline elements, which silently renders the bars as hairlines. */
+.s-prog-track {
+  display: block;
+  grid-column: 1 / -1;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--d-surface-2);
+  border: 1px solid var(--d-line);
+  overflow: hidden;
+}
+.s-prog-fill { display: block; height: 100%; background: var(--d-primary); border-radius: 99px; }
+
+.s-report { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.s-report-title { font-size: 14px; font-weight: 600; }
+.s-report-date { font-size: 12px; color: var(--d-ink-soft); }
+
+/* status: never colour alone — always a mark AND a word */
+.s-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11.5px; font-weight: 600;
+  padding: 4px 9px; border-radius: 99px;
+  background: var(--d-surface-2); color: var(--d-ink);
+  border: 1px solid var(--d-line);
+}
+.s-badge svg { width: 12px; height: 12px; flex: none; }
+.s-badge--ok { color: var(--d-primary); }
+.s-badge--warn { color: var(--d-accent); }
+
+.s-actions { display: flex; flex-direction: column; gap: 9px; }
+
+@container (min-width: 700px) {
+  .s-parent { padding: 26px 30px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; align-items: start; }
+  .s-topbar, .s-childcard { grid-column: 1 / -1; }
+  .s-stats { grid-template-columns: repeat(2, 1fr); }
+  .s-actions { flex-direction: row; }
+  .s-actions .m-btn { width: auto; flex: 1; }
+}
+
+/* ---------- screen 3: management children list ---------- */
+.s-mgmt { padding: var(--d-pad); display: flex; flex-direction: column; gap: 14px; }
+.s-mgmt-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.s-mgmt-head h2 { font-size: 20px; }
+.s-mgmt-sub { font-size: 12.5px; color: var(--d-ink-soft); }
+.s-mgmt-head .m-btn { width: auto; }
+.s-toolbar { display: flex; gap: 9px; flex-wrap: wrap; }
+.s-toolbar .m-input { flex: 1; min-width: 180px; }
+.s-chip {
+  min-height: 44px; display: inline-flex; align-items: center; padding-inline: 14px;
+  border: 1px solid var(--d-line); border-radius: var(--d-radius-sm);
+  font-size: 13px; color: var(--d-ink-soft); background: var(--d-surface);
+}
+
+/* colour and font are set explicitly rather than inherited: a <table> does not
+   inherit them in quirks mode, which renders the whole roster as near-black
+   text on the dark surface of direction B. */
+.s-table {
+  display: none;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  color: var(--d-ink);
+  font-family: var(--d-font-body);
+}
+.s-table td { color: var(--d-ink); }
+.s-table th {
+  text-align: start; font-size: 10px; font-weight: 600;
+  letter-spacing: var(--d-label-tracking); text-transform: var(--d-label-transform);
+  color: var(--d-ink-soft); padding: 0 12px 9px 0; border-bottom: 1px solid var(--d-line); white-space: nowrap;
+}
+.s-table th:last-child, .s-table td:last-child { padding-inline-end: 0; }
+.s-table td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--d-line); vertical-align: middle; }
+.s-table tr:last-child td { border-bottom: 0; }
+.s-td-name { display: flex; align-items: center; gap: 10px; }
+.s-td-name .s-avatar { width: 34px; height: 34px; font-size: 11px; }
+.s-num { font-variant-numeric: tabular-nums; }
+
+.s-cards { display: flex; flex-direction: column; gap: 10px; }
+.s-row-card { display: flex; flex-direction: column; gap: 10px; }
+.s-row-top { display: flex; align-items: center; gap: 11px; }
+.s-row-name { font-size: 14.5px; font-weight: 600; line-height: 1.3; }
+.s-row-meta { font-size: 12px; color: var(--d-ink-soft); }
+.s-row-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; padding-top: 10px; border-top: 1px solid var(--d-line); }
+.s-row-cell { display: flex; flex-direction: column; gap: 2px; }
+.s-row-cell-label { font-size: 10px; letter-spacing: var(--d-label-tracking); text-transform: var(--d-label-transform); color: var(--d-ink-soft); font-weight: 600; }
+.s-row-cell-value { font-size: 12.5px; }
+
+@container (min-width: 700px) {
+  .s-mgmt { padding: 26px 30px; }
+  .s-table { display: table; }
+  .s-cards { display: none; }
+}
+
+/* ---------- bottom navigation (phone only) ---------- */
+.s-nav {
+  display: flex; border-top: 1px solid var(--d-line); background: var(--d-surface);
+  margin-top: auto;
+}
+.s-nav div {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
+  padding: 9px 4px; font-size: 10px; color: var(--d-ink-soft); min-height: 52px; justify-content: center;
+}
+.s-nav div[data-active='true'] { color: var(--d-primary); font-weight: 600; }
+.s-nav svg { width: 17px; height: 17px; }
+@container (min-width: 700px) { .s-nav { display: none; } }
+
+.screen-wrap { display: flex; flex-direction: column; min-height: 100%; }
+
+@media (max-width: 460px) {
+  .stage[data-device='phone'] .frame { width: 100%; }
+  .controls { gap: 14px 18px; }
+  .segmented button { padding: 8px 10px; font-size: 12.5px; }
+}
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <h1>Elite Pro Academy — visual directions</h1>
+    <p>
+      Three ways the platform could look. Each one shows the same three screens so they can be
+      compared fairly: signing in, the parent's view of their child, and the staff view of all
+      children. Nothing here is clickable — this is appearance only, before any feature is built.
+      Switch between English and Arabic to check that the Arabic version reads properly rather than
+      looking like a translation bolted on afterwards.
+    </p>
+    <div class="notice">
+      <strong>The logo and colours are stand-ins.</strong> The real Elite Pro mark is still being
+      prepared as a vector file. Judge the layout, the typography and the overall feel — the exact
+      green and the final logo drop into whichever direction is chosen.
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="control-group">
+      <span class="control-label" id="lbl-dir">Direction</span>
+      <div class="segmented" role="group" aria-labelledby="lbl-dir" id="dir-group">
+        <button type="button" data-dir="a" aria-pressed="true">A · Composed</button>
+        <button type="button" data-dir="b" aria-pressed="false">B · Performance</button>
+        <button type="button" data-dir="c" aria-pressed="false">C · Family</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label" id="lbl-lang">Language</span>
+      <div class="segmented" role="group" aria-labelledby="lbl-lang" id="lang-group">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="ar" aria-pressed="false" lang="ar">العربية</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label" id="lbl-dev">View</span>
+      <div class="segmented" role="group" aria-labelledby="lbl-dev" id="dev-group">
+        <button type="button" data-dev="phone" aria-pressed="true">Phone</button>
+        <button type="button" data-dev="desktop" aria-pressed="false">Desktop</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="direction-note">
+    <h2 id="dir-title">A · Composed</h2>
+    <p id="dir-desc"></p>
+  </div>
+
+  <div class="stage" id="stage" data-device="phone"></div>
+</div>
+
+<script>
+/* ---------------------------------------------------------------------------
+   Content. Deliberately realistic: long Saudi names in both scripts, real
+   sports from the product brief, Arabic-Indic numerals in the Arabic copy.
+   All people are invented — no real child's data appears anywhere.
+   --------------------------------------------------------------------------- */
+const CONTENT = {
+  en: {
+    brand: 'Elite Pro Academy',
+    tagline: 'More than play, we build the way',
+    login: {
+      heading: 'Sign in to your account',
+      blurb: 'Track your child’s training, attendance and progress reports in one place.',
+      identifier: 'Email or mobile number',
+      identifierSample: 'nouf.alotaibi@example.com',
+      password: 'Password',
+      passwordSample: '••••••••••',
+      submit: 'Sign in',
+      forgot: 'Forgot your password?',
+      help: 'New family? The academy office will create your account for you.',
+      foot: 'Elite Pro Academy · Riyadh, Kingdom of Saudi Arabia'
+    },
+    parent: {
+      greetLabel: 'Signed in as',
+      greetName: 'Nouf Al-Otaibi',
+      childName: 'Yazeed Al-Otaibi',
+      childInitials: 'YA',
+      childMeta: '11 years old · U12 Football',
+      nextLabel: 'Next session',
+      nextWhen: 'Tuesday 7 Oct, 5:00–6:30 PM',
+      nextCoach: 'Coach Faisal Al-Qahtani',
+      nextVenue: 'Pitch 2, Al Nakheel',
+      statAttendanceValue: '90%',
+      statAttendanceSub: '18 of 20 sessions attended',
+      statSessionsValue: '24',
+      statSessionsSub: 'Sessions this season',
+      progressLabel: 'Latest assessment',
+      progress: [
+        { name: 'Physical', score: 8.2 },
+        { name: 'Technical', score: 7.5 },
+        { name: 'Tactical', score: 7.0 },
+        { name: 'Behaviour', score: 9.0 }
+      ],
+      reportLabel: 'Report',
+      reportTitle: 'Session report',
+      reportDate: '28 September',
+      reportStatus: 'Ready to read',
+      viewReport: 'View report',
+      reportAbsence: 'Report an absence',
+      nav: ['Home', 'Progress', 'Reports', 'Profile']
+    },
+    mgmt: {
+      title: 'Children',
+      sub: '34 active · 2 need attention',
+      add: 'Add child',
+      search: 'Search by name or coach code',
+      filter: 'All groups',
+      cols: ['Name', 'Age', 'Group', 'Coach', 'Attendance', 'Status'],
+      statusOk: 'Active',
+      statusWarn: 'Needs attention',
+      rows: [
+        { name: 'Yazeed Al-Otaibi', initials: 'YA', age: '11', group: 'U12 Football', coach: 'Faisal Al-Qahtani', att: '90%', ok: true },
+        { name: 'Sara Al-Shehri', initials: 'SA', age: '9', group: 'U10 Swimming', coach: 'Maha Al-Dossari', att: '95%', ok: true },
+        { name: 'Abdulrahman Al-Ghamdi', initials: 'AG', age: '13', group: 'U14 Football', coach: 'Faisal Al-Qahtani', att: '72%', ok: true },
+        { name: 'Lama Al-Harbi', initials: 'LH', age: '7', group: 'Gymnastics — Beginners', coach: 'Reem Al-Zahrani', att: '100%', ok: true },
+        { name: 'Mohammed Al-Dosari', initials: 'MD', age: '12', group: 'U12 Martial Arts', coach: 'Khalid Al-Anazi', att: '61%', ok: false }
+      ],
+      nav: ['Today', 'Children', 'Groups', 'More']
+    }
+  },
+
+  ar: {
+    brand: 'أكاديمية إيليت برو',
+    tagline: 'أكثر من مجرد لعب، نحن نبني الطريق',
+    login: {
+      heading: 'تسجيل الدخول إلى حسابك',
+      blurb: 'تابع تدريبات طفلك وحضوره وتقارير تقدمه في مكان واحد.',
+      identifier: 'البريد الإلكتروني أو رقم الجوال',
+      identifierSample: '٥٥٠ ١٢٣ ٠٥٠',
+      password: 'كلمة المرور',
+      passwordSample: '••••••••••',
+      submit: 'تسجيل الدخول',
+      forgot: 'نسيت كلمة المرور؟',
+      help: 'عائلة جديدة؟ إدارة الأكاديمية هي من تنشئ الحساب لك.',
+      foot: 'أكاديمية إيليت برو · الرياض، المملكة العربية السعودية'
+    },
+    parent: {
+      greetLabel: 'مسجل الدخول باسم',
+      greetName: 'نوف العتيبي',
+      childName: 'يزيد العتيبي',
+      childInitials: 'يع',
+      childMeta: '١١ سنة · كرة قدم تحت ١٢',
+      nextLabel: 'الحصة القادمة',
+      nextWhen: 'الثلاثاء ٧ أكتوبر، ٥:٠٠ – ٦:٣٠ مساءً',
+      nextCoach: 'المدرب فيصل القحطاني',
+      nextVenue: 'ملعب ٢، النخيل',
+      statAttendanceValue: '٩٠٪',
+      statAttendanceSub: 'حضر ١٨ من ٢٠ حصة',
+      statSessionsValue: '٢٤',
+      statSessionsSub: 'الحصص هذا الموسم',
+      progressLabel: 'آخر تقييم',
+      progress: [
+        { name: 'اللياقة البدنية', score: 8.2 },
+        { name: 'المهارات الفنية', score: 7.5 },
+        { name: 'الجانب التكتيكي', score: 7.0 },
+        { name: 'السلوك', score: 9.0 }
+      ],
+      reportLabel: 'التقرير',
+      reportTitle: 'تقرير الحصة',
+      reportDate: '٢٨ سبتمبر',
+      reportStatus: 'جاهز للاطلاع',
+      viewReport: 'عرض التقرير',
+      reportAbsence: 'الإبلاغ عن غياب',
+      nav: ['الرئيسية', 'التقدم', 'التقارير', 'الملف']
+    },
+    mgmt: {
+      title: 'الأطفال',
+      sub: '٣٤ نشط · ٢ يحتاجون متابعة',
+      add: 'إضافة طفل',
+      search: 'ابحث بالاسم أو رمز المدرب',
+      filter: 'جميع المجموعات',
+      cols: ['الاسم', 'العمر', 'المجموعة', 'المدرب', 'الحضور', 'الحالة'],
+      statusOk: 'نشط',
+      statusWarn: 'يحتاج متابعة',
+      rows: [
+        { name: 'يزيد العتيبي', initials: 'يع', age: '١١', group: 'كرة قدم تحت ١٢', coach: 'فيصل القحطاني', att: '٩٠٪', ok: true },
+        { name: 'سارة الشهري', initials: 'سش', age: '٩', group: 'سباحة تحت ١٠', coach: 'مها الدوسري', att: '٩٥٪', ok: true },
+        { name: 'عبدالرحمن الغامدي', initials: 'عغ', age: '١٣', group: 'كرة قدم تحت ١٤', coach: 'فيصل القحطاني', att: '٧٢٪', ok: true },
+        { name: 'لمى الحربي', initials: 'لح', age: '٧', group: 'جمباز — مبتدئون', coach: 'ريم الزهراني', att: '١٠٠٪', ok: true },
+        { name: 'محمد الدوسري', initials: 'مد', age: '١٢', group: 'فنون قتالية تحت ١٢', coach: 'خالد العنزي', att: '٦١٪', ok: false }
+      ],
+      nav: ['اليوم', 'الأطفال', 'المجموعات', 'المزيد']
+    }
+  }
+};
+
+const DIRECTIONS = {
+  a: {
+    title: 'A · Composed',
+    desc: 'Calm and editorial. Generous space, a serif for headings, gold used only as a hairline. Reads as a trusted institution — closest to a private school or a members’ club.'
+  },
+  b: {
+    title: 'B · Performance',
+    desc: 'Bold and athletic. Dark surfaces, heavy type, numbers treated as the hero. Reads as a serious sports programme — closest to a professional club’s own app.'
+  },
+  c: {
+    title: 'C · Family',
+    desc: 'Warm and approachable. Softer ground, rounded corners, one friendly typeface across both languages. Reads as reassuring for parents — the least corporate of the three.'
+  }
+};
+
+/* Placeholder brand mark: a figure inside a circle, echoing the shape of the
+   real logo without pretending to be it. Replaced by the true SVG. */
+const MARK = `<svg viewBox="0 0 48 48" role="img" aria-label="Placeholder logo">
+  <circle cx="24" cy="24" r="22.5" fill="none" stroke="var(--d-primary)" stroke-width="2"/>
+  <circle cx="24" cy="14.5" r="4" fill="var(--d-accent)"/>
+  <path d="M24 20.5c-4.2 0-7 2.4-7.6 6.2l-.9 5.6h4.1l.7 8.2h7.4l.7-8.2h4.1l-.9-5.6c-.6-3.8-3.4-6.2-7.6-6.2z" fill="var(--d-primary)"/>
+</svg>`;
+
+const ICON_OK = `<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3.2L13 5"/></svg>`;
+const ICON_WARN = `<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.2v4.4"/><path d="M8 11.4h.01"/><circle cx="8" cy="8" r="6.4"/></svg>`;
+const NAV_ICON = `<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2.4"/></svg>`;
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function markBlock(t, size) {
+  return `<div class="m-mark">${MARK}<div><div class="m-mark-name">${esc(t.brand)}</div>${size !== 'small' ? `<div class="m-mark-tag">${esc(t.tagline)}</div>` : ''}</div></div>`;
+}
+
+function loginScreen(t) {
+  const c = t.login;
+  return `<div class="screen-wrap"><div class="screen s-login">
+    <div class="s-login-head">
+      ${markBlock(t)}
+      <div>
+        <h2 class="m-display">${esc(c.heading)}</h2>
+        <p style="margin:9px 0 0;font-size:13.5px;color:var(--d-ink-soft);max-width:44ch">${esc(c.blurb)}</p>
+      </div>
+    </div>
+    <div class="s-login-panel m-card">
+      <div class="s-login-form">
+        <div class="m-field"><label>${esc(c.identifier)}</label><div class="m-input">${esc(c.identifierSample)}</div></div>
+        <div class="m-field"><label>${esc(c.password)}</label><div class="m-input">${esc(c.passwordSample)}</div></div>
+        <button class="m-btn" type="button" tabindex="-1">${esc(c.submit)}</button>
+        <div class="s-login-alt"><a href="#" tabindex="-1">${esc(c.forgot)}</a></div>
+      </div>
+    </div>
+    <div class="s-login-foot">${esc(c.help)}<br>${esc(c.foot)}</div>
+  </div></div>`;
+}
+
+function parentScreen(t) {
+  const c = t.parent;
+  const bars = c.progress.map((p) => `
+    <div class="s-prog-row">
+      <span class="s-prog-name">${esc(p.name)}</span>
+      <span class="s-prog-score s-num">${p.score.toFixed(1)}</span>
+      <span class="s-prog-track"><span class="s-prog-fill" style="width:${p.score * 10}%"></span></span>
+    </div>`).join('');
+
+  return `<div class="screen-wrap"><div class="screen s-parent">
+    <div class="s-topbar">
+      ${markBlock(t, 'small')}
+      <div class="s-greet" style="text-align:end">${esc(c.greetLabel)}<strong>${esc(c.greetName)}</strong></div>
+    </div>
+
+    <div class="s-childcard m-card s-child">
+      <div class="s-avatar">${esc(c.childInitials)}</div>
+      <div>
+        <div class="s-child-name">${esc(c.childName)}</div>
+        <div class="s-child-meta">${esc(c.childMeta)}</div>
+      </div>
+    </div>
+
+    <div class="m-card s-next">
+      <span class="m-label">${esc(c.nextLabel)}</span>
+      <span class="s-next-when">${esc(c.nextWhen)}</span>
+      <span class="s-next-row">${esc(c.nextCoach)}</span>
+      <span class="s-next-row">${esc(c.nextVenue)}</span>
+    </div>
+
+    <div class="s-stats">
+      <div class="m-card s-stat">
+        <span class="s-stat-value">${esc(c.statAttendanceValue)}</span>
+        <span class="s-stat-sub">${esc(c.statAttendanceSub)}</span>
+      </div>
+      <div class="m-card s-stat">
+        <span class="s-stat-value">${esc(c.statSessionsValue)}</span>
+        <span class="s-stat-sub">${esc(c.statSessionsSub)}</span>
+      </div>
+    </div>
+
+    <div class="m-card s-progress">
+      <span class="m-label">${esc(c.progressLabel)}</span>
+      ${bars}
+    </div>
+
+    <div class="m-card s-report">
+      <div>
+        <div class="s-report-title">${esc(c.reportTitle)}</div>
+        <div class="s-report-date">${esc(c.reportDate)}</div>
+      </div>
+      <span class="s-badge s-badge--ok">${ICON_OK}${esc(c.reportStatus)}</span>
+    </div>
+
+    <div class="s-actions">
+      <button class="m-btn" type="button" tabindex="-1">${esc(c.viewReport)}</button>
+      <button class="m-btn m-btn--ghost" type="button" tabindex="-1">${esc(c.reportAbsence)}</button>
+    </div>
+  </div>
+  <nav class="s-nav">${c.nav.map((n, i) => `<div data-active="${i === 0}">${NAV_ICON}<span>${esc(n)}</span></div>`).join('')}</nav>
+  </div>`;
+}
+
+function mgmtScreen(t) {
+  const c = t.mgmt;
+  const badge = (ok) => ok
+    ? `<span class="s-badge s-badge--ok">${ICON_OK}${esc(c.statusOk)}</span>`
+    : `<span class="s-badge s-badge--warn">${ICON_WARN}${esc(c.statusWarn)}</span>`;
+
+  const tableRows = c.rows.map((r) => `
+    <tr>
+      <td><span class="s-td-name"><span class="s-avatar">${esc(r.initials)}</span>${esc(r.name)}</span></td>
+      <td class="s-num">${esc(r.age)}</td>
+      <td>${esc(r.group)}</td>
+      <td>${esc(r.coach)}</td>
+      <td class="s-num">${esc(r.att)}</td>
+      <td>${badge(r.ok)}</td>
+    </tr>`).join('');
+
+  const cards = c.rows.map((r) => `
+    <div class="m-card s-row-card">
+      <div class="s-row-top">
+        <span class="s-avatar">${esc(r.initials)}</span>
+        <div>
+          <div class="s-row-name">${esc(r.name)}</div>
+          <div class="s-row-meta">${esc(r.age)} · ${esc(r.group)}</div>
+        </div>
+      </div>
+      <div class="s-row-grid">
+        <div class="s-row-cell"><span class="s-row-cell-label">${esc(c.cols[3])}</span><span class="s-row-cell-value">${esc(r.coach)}</span></div>
+        <div class="s-row-cell"><span class="s-row-cell-label">${esc(c.cols[4])}</span><span class="s-row-cell-value s-num">${esc(r.att)}</span></div>
+        <div class="s-row-cell" style="grid-column:1/-1">${badge(r.ok)}</div>
+      </div>
+    </div>`).join('');
+
+  return `<div class="screen-wrap"><div class="screen s-mgmt">
+    <div class="s-mgmt-head">
+      <div>
+        <h2 class="m-display">${esc(c.title)}</h2>
+        <div class="s-mgmt-sub">${esc(c.sub)}</div>
+      </div>
+      <button class="m-btn" type="button" tabindex="-1">${esc(c.add)}</button>
+    </div>
+    <div class="s-toolbar">
+      <div class="m-input">${esc(c.search)}</div>
+      <span class="s-chip">${esc(c.filter)}</span>
+    </div>
+    <table class="s-table">
+      <thead><tr>${c.cols.map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+    <div class="s-cards">${cards}</div>
+  </div>
+  <nav class="s-nav">${c.nav.map((n, i) => `<div data-active="${i === 1}">${NAV_ICON}<span>${esc(n)}</span></div>`).join('')}</nav>
+  </div>`;
+}
+
+const SCREENS = [
+  { key: 'login', caption: { en: 'Signing in', ar: 'تسجيل الدخول' }, build: loginScreen },
+  { key: 'parent', caption: { en: 'Parent — my child', ar: 'ولي الأمر — طفلي' }, build: parentScreen },
+  { key: 'mgmt', caption: { en: 'Staff — all children', ar: 'الإدارة — جميع الأطفال' }, build: mgmtScreen }
+];
+
+const state = { dir: 'a', lang: 'en', dev: 'phone' };
+const stage = document.getElementById('stage');
+
+function render() {
+  const t = CONTENT[state.lang];
+  const rtl = state.lang === 'ar';
+
+  document.getElementById('dir-title').textContent = DIRECTIONS[state.dir].title;
+  document.getElementById('dir-desc').textContent = DIRECTIONS[state.dir].desc;
+
+  stage.dataset.device = state.dev;
+  stage.innerHTML = SCREENS.map((s) => `
+    <div class="screen-block">
+      <span class="screen-caption">${esc(s.caption[state.lang])}</span>
+      <div class="frame" data-direction="${state.dir}" dir="${rtl ? 'rtl' : 'ltr'}" lang="${state.lang}">
+        ${s.build(t)}
+      </div>
+    </div>`).join('');
+}
+
+function wire(groupId, key) {
+  const group = document.getElementById(groupId);
+  group.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    state[key] = btn.dataset[key === 'dir' ? 'dir' : key === 'lang' ? 'lang' : 'dev'];
+    group.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+    render();
+  });
+}
+
+wire('dir-group', 'dir');
+wire('lang-group', 'lang');
+wire('dev-group', 'dev');
+render();
+</script>
