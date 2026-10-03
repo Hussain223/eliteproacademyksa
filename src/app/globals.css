@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+/* ===========================================================================
+   DESIGN TOKENS
+   ---------------------------------------------------------------------------
+   Every colour, size and radius in the platform is named here and nowhere
+   else. Screens reference the names; they never hardcode a value.
+
+   Why: when the client approves a visual direction in Phase 1 — or rebrands in
+   three years — we change these values once and the whole platform follows.
+   Without this, a rebrand is a find-and-replace across hundreds of files.
+
+   !!!  THE COLOUR VALUES BELOW ARE PLACEHOLDERS.  !!!
+   They are the right *roles* (green primary, gold accent, navy neutral, orange
+   attention) with provisional hex values, chosen so the scaffold is visible and
+   legible. They are NOT the Elite Pro brand colours.
+
+   Replaced in Phase 2, once (a) Hussain supplies the real brand values and
+   (b) the client approves a direction in Phase 1. Until then, nothing built on
+   top of these is a finished design.
+   See /docs/design-system.md.
+   =========================================================================== */
+
+@theme {
+  /* --- Brand: one primary, one accent, one deep neutral, one attention ---
+     Discipline matters here. The academy's print materials used four loud
+     colours competing with each other, which is a large part of why they read
+     as unprofessional. The platform allows exactly these roles. */
+
+  /* Primary — green. Main actions, active states, links, brand presence. */
+  --color-primary-50: #eef7f2;
+  --color-primary-100: #d4ebdf;
+  --color-primary-200: #a9d7bf;
+  --color-primary-300: #74bd98;
+  --color-primary-400: #459d75;
+  --color-primary-500: #1f7a52; /* the primary */
+  --color-primary-600: #186342;
+  --color-primary-700: #134e34;
+  --color-primary-800: #0e3a27;
+  --color-primary-900: #09271b;
+
+  /* Accent — gold. Premium highlight, selected emphasis, small celebratory
+     moments. Never a large fill. */
+  --color-accent-50: #fdf8ec;
+  --color-accent-100: #f8ecc9;
+  --color-accent-200: #f0d893;
+  --color-accent-300: #e5bf57;
+  --color-accent-400: #d4a62f;
+  --color-accent-500: #b78a1d; /* the accent */
+  --color-accent-600: #946e16;
+  --color-accent-700: #705313;
+  --color-accent-800: #4d390f;
+  --color-accent-900: #2e220a;
+
+  /* Neutral/depth — navy. Primary text, headers, depth. The workhorse dark. */
+  --color-ink-50: #f4f6f9;
+  --color-ink-100: #e4e9f0;
+  --color-ink-200: #c6d0de;
+  --color-ink-300: #97a7bd;
+  --color-ink-400: #647a98;
+  --color-ink-500: #44597a;
+  --color-ink-600: #324462;
+  --color-ink-700: #26344c;
+  --color-ink-800: #1a2435;
+  --color-ink-900: #111826; /* primary text */
+
+  /* Attention — orange. ONE job: pull the eye to a single important thing.
+     A critical alert, or the one call-to-action in an empty state. Never
+     sprinkled around as a fourth brand colour. */
+  --color-attention-500: #d1601a;
+  --color-attention-600: #a94a12;
+
+  /* --- Semantic colours (separate from brand) ---
+     Note: the attention orange sits close to the warning tone. Warning is
+     deliberately pushed amber and must always carry an icon and a word, never
+     colour alone — see the hard rule below. */
+  --color-success-500: #1f7a52;
+  --color-success-50: #eef7f2;
+  --color-warning-500: #b4820c;
+  --color-warning-50: #fdf6e4;
+  --color-error-500: #c0392b;
+  --color-error-50: #fbeceb;
+  --color-info-500: #2c6fb5;
+  --color-info-50: #ebf3fb;
+
+  /* --- HARD RULE, written here so it is impossible to miss ---
+     NEVER communicate status by colour alone. A red dot is not enough; it is a
+     red dot AND the word "Absent". This is an accessibility requirement
+     (colour-blind users, screen readers) and a clarity one — an academy
+     employee should never have to learn what a colour means. */
+
+  /* --- Typography ---
+     One font system handling Arabic and English well, rather than per-component
+     fonts. PROVISIONAL: final family is tied to the approved Phase 1 direction.
+     Arabic needs more line-height than Latin at the same size to stay legible —
+     that is why the body leading is generous.
+     The two families are loaded in layout.tsx and exposed as
+     --font-latin and --font-arabic. Latin comes first so English text uses the
+     Latin face; Arabic glyphs fall through to the Arabic face automatically. */
+  --font-sans: var(--font-latin), var(--font-arabic), ui-sans-serif, system-ui,
+    sans-serif;
+
+  /* --- Radius: one personality, held consistently --- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+
+  /* --- Shadow: restrained. The print work drowned in drop shadows; the
+         platform stays flatter and calmer. --- */
+  --shadow-card: 0 1px 2px rgb(17 24 38 / 0.06), 0 1px 3px rgb(17 24 38 / 0.04);
+  --shadow-raised: 0 4px 12px rgb(17 24 38 / 0.08);
+}
+
+/* ===========================================================================
+   BASE
+   =========================================================================== */
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+  /* Arabic needs room to breathe. */
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The page itself must never scroll sideways — a WCAG 2.2 reflow requirement.
+   Wide things (a data table) scroll inside their own container instead. */
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Keyboard users must always be able to see where they are. */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+/* Some people get motion sickness from animation. Respect the setting they
+   already told their operating system about. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

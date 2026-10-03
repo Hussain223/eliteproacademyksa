@@ -1,0 +1,28 @@
+{
+  "brand": {
+    "name": "Elite Pro Academy",
+    "tagline": "More than play, we build the way"
+  },
+  "common": {
+    "switchLanguage": "Switch language",
+    "languageName": "English"
+  },
+  "phase0": {
+    "eyebrow": "Phase 0 — Foundations",
+    "heading": "The pipeline is live",
+    "intro": "This is a deliberately plain technical placeholder, not a design. It exists to prove the foundations work before any screen is built. The visual direction is chosen by the client in Phase 1.",
+    "checklistTitle": "What this page proves",
+    "checks": {
+      "deploy": "The repository builds and deploys automatically.",
+      "locale": "Both languages are served from their own address.",
+      "direction": "The page direction flips with the language.",
+      "tokens": "Brand values come from design tokens, not hardcoded colours.",
+      "mobile": "The layout reflows down to a 320px-wide phone."
+    },
+    "directionLabel": "Current direction",
+    "localeLabel": "Current language",
+    "nextTitle": "What happens next",
+    "nextBody": "Phase 1: two or three branded mockup directions for the client to choose from. No feature is built until one is approved.",
+    "tokenWarning": "The colours on this page are placeholders, not the Elite Pro brand palette."
+  }
+}
