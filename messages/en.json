@@ -7,22 +7,89 @@
     "switchLanguage": "Switch language",
     "languageName": "English"
   },
-  "phase0": {
-    "eyebrow": "Phase 0 — Foundations",
-    "heading": "The pipeline is live",
-    "intro": "This is a deliberately plain technical placeholder, not a design. It exists to prove the foundations work before any screen is built. The visual direction is chosen by the client in Phase 1.",
-    "checklistTitle": "What this page proves",
-    "checks": {
-      "deploy": "The repository builds and deploys automatically.",
-      "locale": "Both languages are served from their own address.",
-      "direction": "The page direction flips with the language.",
-      "tokens": "Brand values come from design tokens, not hardcoded colours.",
-      "mobile": "The layout reflows down to a 320px-wide phone."
+  "nav": {
+    "programmes": "Programmes",
+    "approach": "Our approach",
+    "contact": "Contact",
+    "signIn": "Sign in",
+    "menu": "Menu"
+  },
+  "hero": {
+    "eyebrow": "Youth sports academy · Saudi Arabia",
+    "title": "More than play, we build the way",
+    "body": "A sports academy for children aged 5 to 14. Professional coaching across five disciplines — with every session recorded, and every parent kept in the loop.",
+    "ctaPrimary": "Enquire about a place",
+    "ctaSecondary": "See our programmes",
+    "ages": "Ages 5–14",
+    "disciplinesCount": "Five disciplines",
+    "bilingual": "Arabic & English"
+  },
+  "programmes": {
+    "eyebrow": "Programmes",
+    "title": "Five disciplines, one standard",
+    "body": "Children can train in more than one discipline at a time. Each group is banded by age and level, so your child is always with peers at their own stage.",
+    "football": {
+      "name": "Football",
+      "body": "Technical skills, match play and tactical awareness, in age-banded squads."
     },
-    "directionLabel": "Current direction",
-    "localeLabel": "Current language",
-    "nextTitle": "What happens next",
-    "nextBody": "Phase 2: turning the approved look into reusable building blocks and the app shell, so every screen after it is consistent and quick to build.",
-    "tokenWarning": "These are the approved colours — direction C, chosen by the client. The logo is still a stand-in until the vector file arrives."
+    "swimming": {
+      "name": "Swimming",
+      "body": "From water confidence through to stroke technique, taught in small groups."
+    },
+    "gymnastics": {
+      "name": "Gymnastics",
+      "body": "Strength, balance and body control — the foundation underneath every other sport."
+    },
+    "martialArts": {
+      "name": "Martial arts",
+      "body": "Discipline, focus and self-control, taught with safety as the first principle."
+    },
+    "nutrition": {
+      "name": "Nutrition & healthy weight",
+      "body": "Guided programmes that build healthy habits, run alongside training."
+    }
+  },
+  "approach": {
+    "eyebrow": "Our approach",
+    "title": "What your child actually gets",
+    "coaches": {
+      "name": "A coach who knows your child",
+      "body": "Every squad is led by an assigned coach who follows your child's progress by name — not a rota of whoever is available."
+    },
+    "records": {
+      "name": "Every session recorded",
+      "body": "Attendance and assessments are logged for each session across four areas: physical, technical, tactical and behaviour."
+    },
+    "reports": {
+      "name": "Reports you actually receive",
+      "body": "Progress reports reach you directly after sessions and at the end of each month, rather than sitting in a file you never see."
+    },
+    "groups": {
+      "name": "Grouped by age and level",
+      "body": "Children train with peers at their own stage, and can move between groups as they develop."
+    }
+  },
+  "contact": {
+    "eyebrow": "Get in touch",
+    "title": "Enquire about a place",
+    "body": "Tell us your child's age and the sport they are interested in, and the academy office will get back to you.",
+    "whatsapp": "Message us on WhatsApp",
+    "callLabel": "Phone",
+    "emailLabel": "Email",
+    "locationLabel": "Location",
+    "hoursLabel": "Office hours",
+    "phone": "+966 50 000 0000",
+    "email": "info@eliteproacademy.sa",
+    "location": "Riyadh, Saudi Arabia",
+    "hours": "Sunday to Thursday, 4:00–9:00 PM"
+  },
+  "portal": {
+    "title": "Already with us?",
+    "body": "Parents and coaches sign in to see schedules, attendance and progress reports.",
+    "cta": "Sign in to the parent portal"
+  },
+  "footer": {
+    "rights": "Elite Pro Academy. All rights reserved.",
+    "builtFor": "Ages 5–14 · Arabic and English"
   }
 }
