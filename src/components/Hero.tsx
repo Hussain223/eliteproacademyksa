@@ -81,13 +81,13 @@ export async function Hero() {
             <div className="hero-rise hero-rise-3 order-4 mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 lg:order-none lg:justify-start">
               <a
                 href="#programmes"
-                className="inline-flex min-h-13 items-center justify-center rounded-full bg-[#e8711f] px-4 text-base font-bold text-[#1a0c04] transition-transform hover:scale-[1.03] sm:px-7"
+                className="inline-flex min-h-13 items-center justify-center rounded-full bg-[#e8711f] px-4 text-base font-bold text-[#1a0c04] transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:px-7"
               >
                 {t('ctaPrimary')}
               </a>
               <a
                 href="#contact"
-                className="inline-flex min-h-13 items-center justify-center rounded-full border-[1.5px] border-white/35 px-4 text-base font-bold text-white transition-colors hover:bg-white/10 sm:px-7"
+                className="inline-flex min-h-13 items-center justify-center rounded-full border-[1.5px] border-white/35 px-4 text-base font-bold text-white transition-[background-color,transform] duration-200 ease-out hover:border-white/55 hover:bg-white/10 active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none sm:px-7"
               >
                 {t('ctaSecondary')}
               </a>
