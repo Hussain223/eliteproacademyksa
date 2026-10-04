@@ -89,6 +89,26 @@ automatically on every pull request.
 
 ---
 
+## After cloning: restore the agent skills
+
+The project ships a set of front-end design skills for AI coding assistants.
+The skill files themselves are in the repository, but the shortcuts that point
+your assistant at them are generated per machine — they are symlinks, and
+symlinks do not survive a clone on Windows. Regenerate them with:
+
+```bash
+npx skills add Leonxlnx/taste-skill
+```
+
+One command, once per clone. Nothing else depends on it; the site builds and
+runs without it.
+
+(The CLI also lists an `experimental_install` command that sounds like the
+right one. It reports success but does not recreate the shortcuts — verified.
+Use the line above.)
+
+---
+
 ## How changes get made
 
 Per `CLAUDE.md`: one feature at a time, on its own branch.

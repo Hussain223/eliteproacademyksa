@@ -37,3 +37,11 @@ yarn-error.log*
 .vscode/*
 !.vscode/extensions.json
 *.swp
+
+# Agent skills (npx skills)
+# The real skill content lives in .agents/skills/ and IS committed.
+# .claude/skills/ holds symlinks pointing at it, generated per machine.
+# Symlinks do not survive a clone on Windows without developer mode — they
+# arrive as text files containing a path, and the skills silently fail to
+# load. So they are regenerated instead: npx skills add Leonxlnx/taste-skill
+.claude/skills/
