@@ -17,12 +17,13 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-bg/92 backdrop-blur-sm">
       <div className="mx-auto flex min-h-16 w-full max-w-6xl flex-wrap items-center gap-x-6 gap-y-2 px-5 py-2.5">
-        <a
-          href="#top"
-          className="flex items-center gap-2.5 text-primary-600 me-auto"
-        >
-          <BrandMark className="h-9 w-9 shrink-0" />
-          <span className="text-base leading-tight font-semibold text-ink-900">
+        {/* min-w-0 on both the link and the wordmark is load-bearing: a flex
+            item defaults to min-width:auto, so without it the brand name
+            refuses to shrink or wrap and pushes the header off a 320px
+            screen. */}
+        <a href="#top" className="me-auto flex min-w-0 items-center gap-2.5">
+          <BrandMark className="h-9 w-auto shrink-0 sm:h-10" />
+          <span className="min-w-0 text-sm leading-tight font-semibold text-balance text-ink-900 sm:text-base">
             {brand('name')}
           </span>
         </a>

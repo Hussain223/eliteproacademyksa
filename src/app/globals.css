@@ -136,40 +136,78 @@
    BASE
    =========================================================================== */
 
-:root {
-  color-scheme: light;
+/* ---------------------------------------------------------------------------
+   These live in @layer base ON PURPOSE.
+
+   Tailwind puts its utilities in @layer utilities. CSS that sits in no layer
+   at all beats every layered rule regardless of specificity — so an unlayered
+   `img { height: auto }` silently overrides `h-10`, `w-auto` and every other
+   size utility, and images render at their full intrinsic size. That broke the
+   logo (277px wide in a 320px header) before it was caught.
+
+   Anything here that styles a bare element must stay inside this layer.
+   --------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Arabic needs more room between lines than Latin at the same size, or it
+     reads as cramped — the ascenders and descenders are taller. Verified by
+     rendering real Arabic in Rubik rather than assuming. */
+  :lang(ar) {
+    line-height: 1.85;
+  }
+
+  /* The page itself must never scroll sideways — a WCAG 2.2 reflow
+     requirement. Wide things (a roster table) scroll inside their own
+     container instead. */
+  img,
+  video,
+  svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Keyboard users must always be able to see where they are.
+     primary-500 measures 4.99:1 against the page, well past the 3:1 the focus
+     indicator needs. */
+  :focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
 }
 
-body {
-  background-color: var(--color-bg);
-  color: var(--color-ink-800);
-  font-family: var(--font-sans);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+/* Hero entrance. A short settle on load, not a scroll-triggered reveal — the
+   hero must be fully readable in the first frame, including in a screenshot or
+   a link preview. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-/* Arabic needs more room between lines than Latin at the same size, or it
-   reads as cramped — the ascenders and descenders are taller. Verified by
-   rendering real Arabic in Rubik rather than assuming. */
-:lang(ar) {
-  line-height: 1.85;
+.hero-rise {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 0.8, 0.3, 1) both;
 }
-
-/* The page itself must never scroll sideways — a WCAG 2.2 reflow requirement.
-   Wide things (a roster table) scroll inside their own container instead. */
-img,
-video,
-svg {
-  max-width: 100%;
-  height: auto;
+.hero-rise-2 {
+  animation-delay: 0.1s;
 }
-
-/* Keyboard users must always be able to see where they are.
-   primary-500 measures 4.99:1 against the page, well past the 3:1 the focus
-   indicator needs. */
-:focus-visible {
-  outline: 2px solid var(--color-primary-500);
-  outline-offset: 2px;
+.hero-rise-3 {
+  animation-delay: 0.2s;
 }
 
 /* Some people get motion sickness from animation. Respect the setting they

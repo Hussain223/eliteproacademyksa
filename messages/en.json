@@ -12,17 +12,16 @@
     "approach": "Our approach",
     "contact": "Contact",
     "signIn": "Sign in",
-    "menu": "Menu"
+    "menu": "Menu",
+    "logoAlt": "Elite Pro Academy"
   },
   "hero": {
-    "eyebrow": "Youth sports academy · Saudi Arabia",
-    "title": "More than play, we build the way",
-    "body": "A sports academy for children aged 5 to 14. Professional coaching across five disciplines — with every session recorded, and every parent kept in the loop.",
-    "ctaPrimary": "Enquire about a place",
-    "ctaSecondary": "See our programmes",
-    "ages": "Ages 5–14",
-    "disciplinesCount": "Five disciplines",
-    "bilingual": "Arabic & English"
+    "titleLead": "Every Child Has a ",
+    "titleAccent": "Way",
+    "sub": "More than sports, we create an environment where children grow stronger, build confidence, and develop healthy habits through movement.",
+    "ctaPrimary": "Explore Programs",
+    "ctaSecondary": "Get in Touch",
+    "athleteAlt": "A boy in a green and gold football kit striking a ball mid-kick"
   },
   "programmes": {
     "eyebrow": "Programmes",

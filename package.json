@@ -12,7 +12,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "check:rtl": "node scripts/check-logical-css.mjs",
-    "check": "npm run lint && npm run typecheck && npm run check:rtl && npm run build"
+    "check": "npm run lint && npm run typecheck && npm run check:rtl && npm run build",
+    "images": "node scripts/prepare-images.mjs"
   },
   "dependencies": {
     "next": "16.3.8",
@@ -27,6 +28,7 @@
     "@types/react-dom": "19.3.0",
     "eslint": "9.39.5",
     "eslint-config-next": "16.3.8",
+    "sharp": "^0.35.5",
     "tailwindcss": "4.3.3",
     "typescript": "6.0.3"
   }

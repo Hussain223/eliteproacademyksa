@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { BrandMark } from '@/components/BrandMark';
+import { Hero } from '@/components/Hero';
 import { SiteHeader } from '@/components/SiteHeader';
 import { routing } from '@/i18n/routing';
 
@@ -39,7 +40,7 @@ export async function generateMetadata({
 
   return {
     title: `${t('name')} — ${t('tagline')}`,
-    description: hero('body'),
+    description: hero('sub'),
     alternates: {
       languages: Object.fromEntries(routing.locales.map((l) => [l, `/${l}`])),
     },
@@ -54,7 +55,6 @@ export default async function LandingPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations('hero');
   const brand = await getTranslations('brand');
   const prog = await getTranslations('programmes');
   const app = await getTranslations('approach');
@@ -84,37 +84,7 @@ export default async function LandingPage({
       <SiteHeader />
 
       <main className="flex-1">
-        {/* ---------- hero ---------- */}
-        <section className="mx-auto w-full max-w-6xl px-5 pt-12 pb-14 sm:pt-16 sm:pb-20">
-          <p className="text-xs font-semibold tracking-widest text-primary-600 uppercase">
-            {t('eyebrow')}
-          </p>
-          <h1 className="mt-4 max-w-3xl text-4xl leading-[1.12] font-bold tracking-tight text-ink-900 text-balance sm:text-5xl lg:text-6xl">
-            {t('title')}
-          </h1>
-          <p className="mt-5 max-w-2xl text-lg text-ink-600">{t('body')}</p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#contact"
-              className="inline-flex min-h-12 items-center justify-center rounded-sm bg-primary-500 px-6 text-base font-semibold text-white transition-colors hover:bg-primary-600"
-            >
-              {t('ctaPrimary')}
-            </a>
-            <a
-              href="#programmes"
-              className="inline-flex min-h-12 items-center justify-center rounded-sm border border-primary-500 px-6 text-base font-semibold text-primary-600 transition-colors hover:bg-primary-50"
-            >
-              {t('ctaSecondary')}
-            </a>
-          </div>
-
-          <ul className="mt-10 flex flex-wrap gap-x-7 gap-y-2 border-t border-line pt-5 text-sm font-medium text-ink-600">
-            <li>{t('ages')}</li>
-            <li>{t('disciplinesCount')}</li>
-            <li>{t('bilingual')}</li>
-          </ul>
-        </section>
+        <Hero />
 
         {/* ---------- programmes ---------- */}
         <section
