@@ -29,7 +29,7 @@ export function SiteHeader() {
         </a>
 
         <nav aria-label={t('menu')} className="hidden items-center gap-1 md:flex">
-          {(['programmes', 'approach', 'contact'] as const).map((key) => (
+          {(['programs', 'about', 'contact'] as const).map((key) => (
             <a
               key={key}
               href={`#${key}`}

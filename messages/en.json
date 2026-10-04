@@ -8,10 +8,9 @@
     "languageName": "English"
   },
   "nav": {
-    "programmes": "Programmes",
-    "approach": "Our approach",
+    "programs": "Programs",
+    "about": "About",
     "contact": "Contact",
-    "signIn": "Sign in",
     "menu": "Menu",
     "logoAlt": "Elite Pro Academy"
   },
@@ -23,72 +22,77 @@
     "ctaSecondary": "Get in Touch",
     "athleteAlt": "A boy in a green and gold football kit striking a ball mid-kick"
   },
-  "programmes": {
-    "eyebrow": "Programmes",
-    "title": "Five disciplines, one standard",
-    "body": "Children can train in more than one discipline at a time. Each group is banded by age and level, so your child is always with peers at their own stage.",
+  "footer": {
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "followLabel": "Follow us",
+    "phone": "+966 57 358 5490",
+    "email": "info@eliteproacademyksa.com",
+    "whatsapp": "WhatsApp",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "emailUs": "Email",
+    "rights": "Elite Pro Academy. All rights reserved."
+  },
+  "why": {
+    "coaches": {
+      "title": "Coaches Who Inspire",
+      "body": "Qualified, experienced coaches who guide every child with care, expertise, and encouragement."
+    },
+    "space": {
+      "title": "Space to Thrive",
+      "body": "Modern facilities and equipment provide a safe, supportive setting for children to learn and grow."
+    },
+    "everyChild": {
+      "title": "Every Child Matters",
+      "body": "Personalised and inclusive training that recognises each child's needs, abilities, and pace."
+    },
+    "beyond": {
+      "title": "Aiming Beyond Today",
+      "body": "With Olympic pathway planning, we help children explore their sporting ambitions and future possibilities."
+    }
+  },
+  "programs": {
+    "introTitle": "Find Their Passion. Build Their Strength.",
+    "introBody": "Every child has a different spark. Our sports and wellness programs encourage children to stay active, learn new skills, and enjoy every step of their journey.",
     "football": {
       "name": "Football",
-      "body": "Technical skills, match play and tactical awareness, in age-banded squads."
+      "body": "Building teamwork, coordination, and confidence through the beautiful game.",
+      "alt": "A child playing football at the academy"
     },
     "swimming": {
       "name": "Swimming",
-      "body": "From water confidence through to stroke technique, taught in small groups."
+      "body": "Developing water skills, physical fitness, and confidence in the water.",
+      "alt": "A smiling boy at the edge of a swimming pool"
     },
     "gymnastics": {
       "name": "Gymnastics",
-      "body": "Strength, balance and body control — the foundation underneath every other sport."
+      "body": "Growing strength, balance, flexibility, and body awareness through movement.",
+      "alt": "A girl in a green and gold leotard holding a balanced gymnastics pose"
     },
     "martialArts": {
-      "name": "Martial arts",
-      "body": "Discipline, focus and self-control, taught with safety as the first principle."
+      "name": "Martial Arts",
+      "body": "Encouraging discipline, focus, self-confidence, and physical development.",
+      "alt": "A boy in a white karate uniform with a green belt, standing in a ready stance"
     },
     "nutrition": {
-      "name": "Nutrition & healthy weight",
-      "body": "Guided programmes that build healthy habits, run alongside training."
+      "name": "Nutrition & Wellness",
+      "body": "Supporting healthier habits through nutritional guidance and wellness programs.",
+      "alt": "A child learning about healthy food at the academy"
+    },
+    "obesity": {
+      "name": "Obesity Solutions",
+      "body": "Providing specialised support to help children work towards healthier, more active lifestyles.",
+      "alt": "A coach supporting a child through a gentle exercise session"
     }
   },
-  "approach": {
-    "eyebrow": "Our approach",
-    "title": "What your child actually gets",
-    "coaches": {
-      "name": "A coach who knows your child",
-      "body": "Every squad is led by an assigned coach who follows your child's progress by name — not a rota of whoever is available."
-    },
-    "records": {
-      "name": "Every session recorded",
-      "body": "Attendance and assessments are logged for each session across four areas: physical, technical, tactical and behaviour."
-    },
-    "reports": {
-      "name": "Reports you actually receive",
-      "body": "Progress reports reach you directly after sessions and at the end of each month, rather than sitting in a file you never see."
-    },
-    "groups": {
-      "name": "Grouped by age and level",
-      "body": "Children train with peers at their own stage, and can move between groups as they develop."
-    }
+  "about": {
+    "title": "More Than Play. We Build the Way.",
+    "body": "At Elite Pro Academy, we believe sports can shape more than physical strength—they can build confidence, resilience, discipline, and lifelong healthy habits. Through specialised programs, qualified coaches, and an inclusive environment, we help children grow into healthier, happier, and more confident individuals."
   },
-  "contact": {
-    "eyebrow": "Get in touch",
-    "title": "Enquire about a place",
-    "body": "Tell us your child's age and the sport they are interested in, and the academy office will get back to you.",
-    "whatsapp": "Message us on WhatsApp",
-    "callLabel": "Phone",
-    "emailLabel": "Email",
-    "locationLabel": "Location",
-    "hoursLabel": "Office hours",
-    "phone": "+966 50 000 0000",
-    "email": "info@eliteproacademy.sa",
-    "location": "Riyadh, Saudi Arabia",
-    "hours": "Sunday to Thursday, 4:00–9:00 PM"
-  },
-  "portal": {
-    "title": "Already with us?",
-    "body": "Parents and coaches sign in to see schedules, attendance and progress reports.",
-    "cta": "Sign in to the parent portal"
-  },
-  "footer": {
-    "rights": "Elite Pro Academy. All rights reserved.",
-    "builtFor": "Ages 5–14 · Arabic and English"
+  "cta": {
+    "title": "Their Journey Starts Here.",
+    "body": "Give your child the space to discover, grow, and build a healthier future through sports.",
+    "button": "Join Our Academy"
   }
 }

@@ -21,7 +21,12 @@ import { localeLabels, routing, type Locale } from '@/i18n/routing';
  * Touch targets are 44px tall — above the WCAG minimum, because this is a
  * control people use on a phone.
  */
-export function LanguageSwitcher() {
+/**
+ * `tone` exists because the switch appears twice: in the light header and
+ * again in the dark footer. The light styling puts dark grey on the inactive
+ * language, which is invisible on the footer's near-black ground.
+ */
+export function LanguageSwitcher({ tone = 'light' }: { tone?: 'light' | 'dark' }) {
   const pathname = usePathname();
   const active = useLocale();
   const t = useTranslations('common');
@@ -31,6 +36,10 @@ export function LanguageSwitcher() {
       <ul className="flex items-center gap-1">
         {routing.locales.map((locale) => {
           const isActive = locale === active;
+          const inactive =
+            tone === 'dark'
+              ? 'text-[#cdd8d0] hover:bg-white/10'
+              : 'text-ink-600 hover:bg-ink-100';
           return (
             <li key={locale}>
               <Link
@@ -40,9 +49,7 @@ export function LanguageSwitcher() {
                 aria-current={isActive ? 'true' : undefined}
                 className={[
                   'flex min-h-11 items-center rounded-md px-4 text-sm font-medium transition-colors',
-                  isActive
-                    ? 'bg-primary-500 text-white'
-                    : 'text-ink-600 hover:bg-ink-100',
+                  isActive ? 'bg-primary-500 text-white' : inactive,
                 ].join(' ')}
               >
                 {localeLabels[locale as Locale]}
