@@ -118,10 +118,6 @@ body {
 .h-lang span[data-on='true'] { background: rgb(255 255 255 / .1); color: #fff; }
 
 /* headline */
-.h-eyebrow {
-  font-size: 10.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--h-gold); margin: 0 0 14px;
-}
 .h-title {
   margin: 0; font-weight: 900; letter-spacing: -0.035em; line-height: 0.95;
   text-wrap: balance; font-size: clamp(42px, 11cqw, 104px);
@@ -131,17 +127,6 @@ body {
 
 .h-sub { margin: 18px 0 0; max-width: 46ch; color: var(--h-body); font-size: clamp(14px, 1.7cqw, 18px); line-height: 1.6; }
 
-/* placeholder copy bars — deliberately wordless, because the real subheadline
-   lives in the copy file and must not be invented here */
-.ph-lines { display: flex; flex-direction: column; gap: 8px; margin: 20px 0 0; max-width: 44ch; }
-.ph-bar { height: 11px; border-radius: 99px; background: rgb(205 216 208 / .22); }
-.ph-bar:nth-child(2) { width: 82%; }
-.ph-bar:nth-child(3) { width: 54%; }
-.ph-tag {
-  display: inline-block; margin-top: 11px; font-size: 9px; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase; color: #8fa197;
-  border: 1px dashed #3c5547; border-radius: 3px; padding: 3px 7px;
-}
 
 /* buttons */
 .h-ctas { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 26px; }
@@ -196,7 +181,7 @@ body {
 .d2 { text-align: center; }
 .d2 .h-body { position: relative; z-index: 3; padding: 40px 20px 0; }
 .d2 .h-title { margin-inline: auto; }
-.d2 .h-sub, .d2 .ph-lines { margin-inline: auto; }
+.d2 .h-sub { margin-inline: auto; }
 .d2 .h-ctas { justify-content: center; }
 .d2 .d2-figure {
   position: relative; z-index: 2; margin-top: -26px;
@@ -247,12 +232,10 @@ body {
       composition has to work mirrored, not just translated.
     </p>
     <div class="notice">
-      <strong>Placeholders you are looking at</strong>
+      <strong>All copy is the real text, taken verbatim from the copy file (section 1, recommended option). Two things are still stand-ins:</strong>
       <ul>
-        <li><b>Subheadline and button labels</b> — the copy file was not in the repository, so the real words are not here. The grey bars show where that text sits and how much room it has.</li>
         <li><b>Athlete image</b> — a drawn stand-in, positioned to show how the real photo breaks out of the layout.</li>
         <li><b>Logo</b> — a drawn stand-in until the SVG arrives.</li>
-        <li><b>The gold word</b> is my guess: "Way" in English, "طريقه" in Arabic. The copy file marks the real one.</li>
       </ul>
     </div>
   </header>
@@ -290,24 +273,25 @@ body {
 </div>
 
 <script>
+/* Verbatim from docs/elite_pro_academy_landing_page_copy.md, section 1 —
+   the recommended hero option. The gold word is the one the copy file marks
+   in bold: "Way" in English, "التميّز" in Arabic. */
 const T = {
   en: {
     brand: 'Elite Pro Academy',
-    eyebrow: 'Youth sports academy · Saudi Arabia',
     title: ['Every Child Has a ', 'Way'],
-    phTag: 'Subheadline — from copy file',
-    primary: 'Primary CTA',
-    secondary: 'Secondary CTA',
+    sub: 'More than sports, we create an environment where children grow stronger, build confidence, and develop healthy habits through movement.',
+    primary: 'Explore Programs',
+    secondary: 'Get in Touch',
     athlete: 'Athlete image — placeholder',
     logo: 'Logo TODO'
   },
   ar: {
     brand: 'أكاديمية إيليت برو',
-    eyebrow: 'أكاديمية رياضية للناشئين · المملكة العربية السعودية',
-    title: ['لكل طفل ', 'طريقه', ' نحو التميّز'],
-    phTag: 'النص الفرعي — من ملف النصوص',
-    primary: 'الزر الأساسي',
-    secondary: 'الزر الثانوي',
+    title: ['لكل طفل طريقه نحو ', 'التميّز'],
+    sub: 'نهيّئ لأطفالكم بيئة تجمع بين الرياضة والتعلّم، لينموا بصحة أفضل، ويكتسبوا الثقة بأنفسهم، ويبنون عادات صحية تدوم معهم.',
+    primary: 'اكتشف برامجنا',
+    secondary: 'تواصل معنا',
     athlete: 'صورة اللاعب — مؤقتة',
     logo: 'الشعار مؤقت'
   }
@@ -360,13 +344,9 @@ const head = (t) => `<div class="h-top">
 </div>`;
 
 const copyBlock = (t) => `
-  <p class="h-eyebrow anim">${t.eyebrow}</p>
-  <h1 class="h-title anim anim-2">${title(t)}</h1>
-  <div class="ph-lines anim anim-3">
-    <span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span>
-  </div>
-  <span class="ph-tag anim anim-3">${t.phTag}</span>
-  <div class="h-ctas anim anim-4">
+  <h1 class="h-title anim">${title(t)}</h1>
+  <p class="h-sub anim anim-2">${t.sub}</p>
+  <div class="h-ctas anim anim-3">
     <span class="btn btn-primary">${t.primary}</span>
     <span class="btn btn-ghost">${t.secondary}</span>
   </div>`;
@@ -386,13 +366,11 @@ const build = {
     ${head(t)}
     <div class="glow" aria-hidden="true"></div>
     <div class="h-body">
-      <p class="h-eyebrow anim">${t.eyebrow}</p>
-      <h1 class="h-title anim anim-2">${title(t)}</h1>
+      <h1 class="h-title anim">${title(t)}</h1>
     </div>
     <div class="d2-figure anim anim-3">${ATHLETE(t)}</div>
     <div class="overlap anim anim-4">
-      <div class="ph-lines"><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div>
-      <span class="ph-tag">${t.phTag}</span>
+      <p class="h-sub">${t.sub}</p>
       <div class="h-ctas">
         <span class="btn btn-primary">${t.primary}</span>
         <span class="btn btn-ghost">${t.secondary}</span>
