@@ -1,0 +1,433 @@
+<title>Elite Pro Hero Directions</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+/* ===========================================================================
+   CHROME — neutral and single-theme on purpose. This page exists to compare
+   two dark hero compositions; a surround that changed with the viewer's
+   light/dark setting would judge them against two different grounds.
+   =========================================================================== */
+:root {
+  --ui-bg: #e7e6e2;
+  --ui-panel: #fdfdfc;
+  --ui-ink: #22262b;
+  --ui-soft: #5d646c;
+  --ui-line: #cfcdc7;
+  color-scheme: light;
+}
+body {
+  margin: 0;
+  background: var(--ui-bg);
+  color: var(--ui-ink);
+  font-family: Rubik, ui-sans-serif, system-ui, sans-serif;
+}
+.page { max-width: 1240px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 70px; }
+.masthead h1 { font-size: clamp(21px, 3.4vw, 30px); font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; text-wrap: balance; }
+.masthead p { margin: 0; max-width: 70ch; color: var(--ui-soft); font-size: 14.5px; line-height: 1.6; }
+
+.notice {
+  margin-top: 14px; padding: 12px 15px; background: #fdeceb;
+  border-inline-start: 3px solid #b3261e; border-radius: 3px;
+  font-size: 13.5px; line-height: 1.6; color: #4a1b17;
+}
+.notice strong { display: block; margin-bottom: 3px; }
+.notice ul { margin: 7px 0 0; padding-inline-start: 18px; }
+.notice li { margin-bottom: 3px; }
+
+.controls {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--ui-bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-block: 1px solid var(--ui-line);
+  padding-block: 12px; margin-block: 22px 24px;
+  display: flex; flex-wrap: wrap; gap: 16px 26px; align-items: flex-end;
+}
+.cgroup { display: flex; flex-direction: column; gap: 6px; max-width: 100%; min-width: 0; }
+.clabel { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ui-soft); }
+.seg { display: flex; flex-wrap: wrap; gap: 3px; background: #d8d7d2; padding: 3px; border-radius: 7px; max-width: 100%; }
+.seg button {
+  font: inherit; font-size: 13px; font-weight: 500; border: 0; background: transparent;
+  color: var(--ui-soft); padding: 8px 13px; min-height: 38px; border-radius: 5px;
+  cursor: pointer; white-space: nowrap; transition: background .15s, color .15s;
+}
+.seg button:hover { background: #e4e3df; color: var(--ui-ink); }
+.seg button[aria-pressed='true'] { background: var(--ui-ink); color: #fff; }
+.seg button:focus-visible { outline: 2px solid var(--ui-ink); outline-offset: 2px; }
+
+.dirnote { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px solid var(--ui-line); }
+.dirnote h2 { font-size: 17px; font-weight: 700; margin: 0; }
+.dirnote p { margin: 0; font-size: 13.5px; color: var(--ui-soft); max-width: 64ch; line-height: 1.55; }
+
+.stage { display: flex; flex-wrap: wrap; gap: 26px; align-items: flex-start; }
+.stage[data-device='desktop'] { flex-direction: column; flex-wrap: nowrap; }
+.block { display: flex; flex-direction: column; gap: 9px; flex: 0 0 auto; }
+.stage[data-device='desktop'] .block { width: 100%; }
+.cap { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ui-soft); }
+.frame {
+  border: 1px solid var(--ui-line); border-radius: 10px; overflow: hidden;
+  box-shadow: 0 2px 10px rgb(0 0 0 / .08); container-type: inline-size; background: #07140d;
+}
+.stage[data-device='phone'] .frame { width: 370px; max-width: 100%; }
+.stage[data-device='desktop'] .frame { width: 100%; }
+
+/* ===========================================================================
+   THE HERO — shared tokens. Both directions use the same palette; they differ
+   in composition only, so the choice is about layout rather than colour.
+
+   Measured, not guessed:
+     white on #07140d ............ 18.84:1
+     gold  #e0b254 on #07140d .....  9.57:1
+     body  #cdd8d0 on #07140d ..... 12.85:1
+     CTA: DARK text on #e8711f ....  6.20:1  (white on any usable orange
+          fails at normal size — the brighter the orange, the worse white
+          gets, so the primary button takes near-black text)
+   =========================================================================== */
+.hero {
+  --h-bg: #07140d;
+  --h-bg-2: #0c2117;
+  --h-ink: #ffffff;
+  --h-body: #cdd8d0;
+  --h-gold: #e0b254;
+  --h-orange: #e8711f;
+  --h-on-orange: #1a0c04;
+  --h-line: #22382b;
+
+  position: relative;
+  background: var(--h-bg);
+  color: var(--h-ink);
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero * { box-sizing: border-box; }
+
+/* top bar */
+.h-top {
+  position: relative; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 16px 20px; border-bottom: 1px solid var(--h-line);
+}
+.h-brand { display: flex; align-items: center; gap: 9px; }
+.h-brand svg { width: 30px; height: 30px; flex: none; }
+.h-brand span { font-size: 13.5px; font-weight: 700; letter-spacing: -0.01em; }
+.h-logo-tag {
+  font-size: 8px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: #7d8c83; border: 1px dashed #3c5547; border-radius: 3px; padding: 2px 5px;
+}
+.h-lang { display: flex; gap: 4px; font-size: 12px; font-weight: 600; }
+.h-lang span { padding: 5px 9px; border-radius: 4px; color: #90a098; }
+.h-lang span[data-on='true'] { background: rgb(255 255 255 / .1); color: #fff; }
+
+/* headline */
+.h-eyebrow {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--h-gold); margin: 0 0 14px;
+}
+.h-title {
+  margin: 0; font-weight: 900; letter-spacing: -0.035em; line-height: 0.95;
+  text-wrap: balance; font-size: clamp(42px, 11cqw, 104px);
+}
+.h-title .gold { color: var(--h-gold); }
+:lang(ar) .h-title { letter-spacing: 0; line-height: 1.18; font-size: clamp(36px, 9cqw, 86px); }
+
+.h-sub { margin: 18px 0 0; max-width: 46ch; color: var(--h-body); font-size: clamp(14px, 1.7cqw, 18px); line-height: 1.6; }
+
+/* placeholder copy bars — deliberately wordless, because the real subheadline
+   lives in the copy file and must not be invented here */
+.ph-lines { display: flex; flex-direction: column; gap: 8px; margin: 20px 0 0; max-width: 44ch; }
+.ph-bar { height: 11px; border-radius: 99px; background: rgb(205 216 208 / .22); }
+.ph-bar:nth-child(2) { width: 82%; }
+.ph-bar:nth-child(3) { width: 54%; }
+.ph-tag {
+  display: inline-block; margin-top: 11px; font-size: 9px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: #8fa197;
+  border: 1px dashed #3c5547; border-radius: 3px; padding: 3px 7px;
+}
+
+/* buttons */
+.h-ctas { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 26px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 50px; padding-inline: 26px; border-radius: 999px;
+  font-size: 15px; font-weight: 700; letter-spacing: -0.005em; white-space: nowrap;
+}
+.btn-primary { background: var(--h-orange); color: var(--h-on-orange); }
+.btn-ghost { border: 1.5px solid rgb(255 255 255 / .35); color: #fff; }
+
+/* athlete placeholder — must visibly break out of its box.
+   The width is capped: left to fill its container the figure scales with the
+   viewport and a desktop hero grows past 2000px tall. */
+.athlete { position: relative; display: block; max-width: 300px; margin-inline: auto; }
+@container (min-width: 720px) { .athlete { max-width: 430px; } }
+.athlete svg { display: block; width: 100%; height: auto; }
+.athlete-tag {
+  position: absolute; inset-inline-start: 50%; transform: translateX(-50%);
+  top: 6px; z-index: 4; white-space: nowrap;
+  font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: #0d2017; background: var(--h-gold); border-radius: 3px; padding: 4px 9px;
+}
+[dir='rtl'] .athlete-tag { transform: translateX(50%); }
+
+/* ---------- DIRECTION 1 · Split ---------- */
+.d1 .h-body { position: relative; z-index: 2; padding: 34px 20px 0; }
+.d1 .d1-figure {
+  position: relative; z-index: 1; margin-top: -8px;
+  /* the breakout: the figure runs past the padded column and off the edge */
+  margin-inline-start: -20px; margin-inline-end: -46px;
+}
+.d1 .rule {
+  position: absolute; inset-inline-start: 0; inset-inline-end: 0; bottom: 118px; height: 1px;
+  background: linear-gradient(to right, transparent, var(--h-gold), transparent);
+  opacity: .5; z-index: 0;
+}
+.d1 .ghost {
+  position: absolute; z-index: 0; bottom: -4%; inset-inline-end: -2%;
+  font-size: 30cqw; font-weight: 900; line-height: .7; letter-spacing: -0.06em;
+  color: rgb(255 255 255 / .028); pointer-events: none; user-select: none;
+}
+@container (min-width: 720px) {
+  .d1 .h-inner { display: grid; grid-template-columns: 1.1fr .9fr; align-items: end; gap: 10px; }
+  .d1 .h-body { padding: 70px 56px 70px; }
+  .d1 .d1-figure { margin: 0 0 -1px; align-self: end; margin-inline-end: -40px; }
+  .d1 .d1-figure .athlete { margin-inline-end: 0; }
+  .d1 .rule { bottom: 0; }
+}
+
+/* ---------- DIRECTION 2 · Poster ---------- */
+.d2 { text-align: center; }
+.d2 .h-body { position: relative; z-index: 3; padding: 40px 20px 0; }
+.d2 .h-title { margin-inline: auto; }
+.d2 .h-sub, .d2 .ph-lines { margin-inline: auto; }
+.d2 .h-ctas { justify-content: center; }
+.d2 .d2-figure {
+  position: relative; z-index: 2; margin-top: -26px;
+  margin-inline: -20px;
+}
+/* type sits in FRONT of the figure — that overlap is the grid break */
+.d2 .overlap {
+  position: relative; z-index: 4; margin-top: -58px; padding: 0 20px 26px;
+  pointer-events: none;
+}
+.d2 .glow {
+  position: absolute; z-index: 0; inset-inline-start: 50%; top: 24%;
+  width: 118cqw; aspect-ratio: 1; transform: translate(-50%, -18%);
+  background: radial-gradient(circle, rgb(224 178 84 / .20) 0%, rgb(224 178 84 / .06) 42%, transparent 68%);
+  pointer-events: none;
+}
+[dir='rtl'] .d2 .glow { transform: translate(50%, -18%); }
+@container (min-width: 720px) {
+  .d2 .h-body { padding: 76px 56px 0; }
+  .d2 .d2-figure { margin-top: -54px; }
+  .d2 .overlap { margin-top: -104px; padding-bottom: 46px; }
+}
+
+/* motion: a short settle on load, never a scroll-triggered reveal — the page
+   must be fully readable in its first frame */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.anim { animation: rise .62s cubic-bezier(.22,.8,.3,1) both; }
+.anim-2 { animation-delay: .09s; }
+.anim-3 { animation-delay: .17s; }
+.anim-4 { animation-delay: .25s; }
+@media (prefers-reduced-motion: reduce) {
+  .anim { animation: none !important; }
+}
+
+@media (max-width: 460px) {
+  .stage[data-device='phone'] .frame { width: 100%; }
+  .seg button { padding: 8px 10px; font-size: 12.5px; }
+}
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <h1>Hero directions — Elite Pro Academy</h1>
+    <p>
+      Two compositions for the new landing-page hero. Same palette, same headline, same
+      content: they differ only in how the headline, the athlete and the buttons are arranged,
+      so the choice is about layout rather than colour. Switch to Arabic on either one — the
+      composition has to work mirrored, not just translated.
+    </p>
+    <div class="notice">
+      <strong>Placeholders you are looking at</strong>
+      <ul>
+        <li><b>Subheadline and button labels</b> — the copy file was not in the repository, so the real words are not here. The grey bars show where that text sits and how much room it has.</li>
+        <li><b>Athlete image</b> — a drawn stand-in, positioned to show how the real photo breaks out of the layout.</li>
+        <li><b>Logo</b> — a drawn stand-in until the SVG arrives.</li>
+        <li><b>The gold word</b> is my guess: "Way" in English, "طريقه" in Arabic. The copy file marks the real one.</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="cgroup">
+      <span class="clabel" id="l-dir">Direction</span>
+      <div class="seg" role="group" aria-labelledby="l-dir" id="g-dir">
+        <button type="button" data-dir="d1" aria-pressed="true">1 · Split</button>
+        <button type="button" data-dir="d2" aria-pressed="false">2 · Poster</button>
+      </div>
+    </div>
+    <div class="cgroup">
+      <span class="clabel" id="l-lang">Language</span>
+      <div class="seg" role="group" aria-labelledby="l-lang" id="g-lang">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="ar" aria-pressed="false" lang="ar">العربية</button>
+      </div>
+    </div>
+    <div class="cgroup">
+      <span class="clabel" id="l-dev">View</span>
+      <div class="seg" role="group" aria-labelledby="l-dev" id="g-dev">
+        <button type="button" data-dev="phone" aria-pressed="true">Phone</button>
+        <button type="button" data-dev="desktop" aria-pressed="false">Desktop</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dirnote">
+    <h2 id="d-title">1 · Split</h2>
+    <p id="d-desc"></p>
+  </div>
+
+  <div class="stage" id="stage" data-device="phone"></div>
+</div>
+
+<script>
+const T = {
+  en: {
+    brand: 'Elite Pro Academy',
+    eyebrow: 'Youth sports academy · Saudi Arabia',
+    title: ['Every Child Has a ', 'Way'],
+    phTag: 'Subheadline — from copy file',
+    primary: 'Primary CTA',
+    secondary: 'Secondary CTA',
+    athlete: 'Athlete image — placeholder',
+    logo: 'Logo TODO'
+  },
+  ar: {
+    brand: 'أكاديمية إيليت برو',
+    eyebrow: 'أكاديمية رياضية للناشئين · المملكة العربية السعودية',
+    title: ['لكل طفل ', 'طريقه', ' نحو التميّز'],
+    phTag: 'النص الفرعي — من ملف النصوص',
+    primary: 'الزر الأساسي',
+    secondary: 'الزر الثانوي',
+    athlete: 'صورة اللاعب — مؤقتة',
+    logo: 'الشعار مؤقت'
+  }
+};
+
+const DIRS = {
+  d1: {
+    title: '1 · Split',
+    desc: 'Headline and athlete side by side, with the figure running off the bottom and outer edge so it breaks the column. A faint oversized word sits behind as texture. Reads as a sports brand — the energy comes from the figure escaping the frame. On a phone the headline stacks above and the figure bleeds off the bottom.'
+  },
+  d2: {
+    title: '2 · Poster',
+    desc: 'Centred and poster-like. The figure rises from the middle and the headline crosses in front of it, so type and image overlap rather than sit in separate columns. A soft gold glow lifts the subject off the black. Bolder and more graphic; it holds its impact at phone size better than a split does.'
+  }
+};
+
+const LOGO = `<svg viewBox="0 0 48 48" aria-hidden="true">
+  <circle cx="24" cy="24" r="22.5" fill="none" stroke="#e0b254" stroke-width="2.5"/>
+  <circle cx="24" cy="14.5" r="4.2" fill="#e0b254"/>
+  <path d="M24 20.5c-4.2 0-7 2.4-7.6 6.2l-.9 5.6h4.1l.7 8.2h7.4l.7-8.2h4.1l-.9-5.6c-.6-3.8-3.4-6.2-7.6-6.2z" fill="#fff"/>
+</svg>`;
+
+/* A drawn athlete stand-in: a striding figure, cropped at the bottom so it is
+   obvious the real photo is meant to run past the edge. */
+const ATHLETE = (t) => `<div class="athlete">
+  <svg viewBox="0 0 320 400" preserveAspectRatio="xMidYMax meet" aria-label="${t.athlete}" role="img">
+    <defs>
+      <linearGradient id="ag2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#36614d"/><stop offset="1" stop-color="#132b20"/>
+      </linearGradient>
+    </defs>
+    <g stroke="url(#ag2)" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M190 104 L158 206"/>
+      <path d="M182 132 C214 146 240 132 250 100"/>
+      <path d="M168 134 C136 152 116 178 110 206"/>
+      <path d="M158 206 C200 226 214 266 200 302 L210 400"/>
+      <path d="M158 206 C122 240 100 292 92 340 L70 400"/>
+    </g>
+    <circle cx="200" cy="66" r="29" fill="url(#ag2)"/>
+  </svg>
+  <span class="athlete-tag">${t.athlete}</span>
+</div>`;
+
+const title = (t) =>
+  t.title.map((part, i) => (i === 1 ? `<span class="gold">${part}</span>` : part)).join('');
+
+const head = (t) => `<div class="h-top">
+  <div class="h-brand">${LOGO}<span>${t.brand}</span><span class="h-logo-tag">${t.logo}</span></div>
+  <div class="h-lang"><span data-on="${t === T.en}">EN</span><span data-on="${t === T.ar}" lang="ar">ع</span></div>
+</div>`;
+
+const copyBlock = (t) => `
+  <p class="h-eyebrow anim">${t.eyebrow}</p>
+  <h1 class="h-title anim anim-2">${title(t)}</h1>
+  <div class="ph-lines anim anim-3">
+    <span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span>
+  </div>
+  <span class="ph-tag anim anim-3">${t.phTag}</span>
+  <div class="h-ctas anim anim-4">
+    <span class="btn btn-primary">${t.primary}</span>
+    <span class="btn btn-ghost">${t.secondary}</span>
+  </div>`;
+
+const build = {
+  d1: (t) => `<div class="hero d1">
+    ${head(t)}
+    <div class="ghost" aria-hidden="true">EPA</div>
+    <div class="h-inner">
+      <div class="h-body">${copyBlock(t)}</div>
+      <div class="d1-figure anim anim-3">${ATHLETE(t)}</div>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+  </div>`,
+
+  d2: (t) => `<div class="hero d2">
+    ${head(t)}
+    <div class="glow" aria-hidden="true"></div>
+    <div class="h-body">
+      <p class="h-eyebrow anim">${t.eyebrow}</p>
+      <h1 class="h-title anim anim-2">${title(t)}</h1>
+    </div>
+    <div class="d2-figure anim anim-3">${ATHLETE(t)}</div>
+    <div class="overlap anim anim-4">
+      <div class="ph-lines"><span class="ph-bar"></span><span class="ph-bar"></span><span class="ph-bar"></span></div>
+      <span class="ph-tag">${t.phTag}</span>
+      <div class="h-ctas">
+        <span class="btn btn-primary">${t.primary}</span>
+        <span class="btn btn-ghost">${t.secondary}</span>
+      </div>
+    </div>
+  </div>`
+};
+
+const state = { dir: 'd1', lang: 'en', dev: 'phone' };
+const stage = document.getElementById('stage');
+
+function render() {
+  const t = T[state.lang];
+  const rtl = state.lang === 'ar';
+  document.getElementById('d-title').textContent = DIRS[state.dir].title;
+  document.getElementById('d-desc').textContent = DIRS[state.dir].desc;
+  stage.dataset.device = state.dev;
+  stage.innerHTML = `<div class="block">
+    <span class="cap">${DIRS[state.dir].title} — ${rtl ? 'Arabic' : 'English'}</span>
+    <div class="frame" dir="${rtl ? 'rtl' : 'ltr'}" lang="${state.lang}">${build[state.dir](t)}</div>
+  </div>`;
+}
+
+function wire(id, key, attr) {
+  const g = document.getElementById(id);
+  g.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    state[key] = b.dataset[attr];
+    g.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    render();
+  });
+}
+wire('g-dir', 'dir', 'dir');
+wire('g-lang', 'lang', 'lang');
+wire('g-dev', 'dev', 'dev');
+render();
+</script>
