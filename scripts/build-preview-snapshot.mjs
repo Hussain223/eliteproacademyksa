@@ -64,11 +64,68 @@ function extract(html, prefix) {
   return { cls, dir, lang, body };
 }
 
+/**
+ * Inline every <img> as a data URI.
+ *
+ * Next.js serves images through /_next/image, which only exists while the
+ * server is running — in a standalone file every photograph would be a broken
+ * icon. Each one is fetched once, cached across the two locales (they use the
+ * same files), and embedded.
+ *
+ * srcset is dropped deliberately. It lists the same picture at a dozen widths;
+ * keeping it would embed each one and bloat the file for no benefit, since a
+ * shared preview does not need per-device resolution switching.
+ */
+const imageCache = new Map();
+
+async function inlineImages(body) {
+  const tags = body.match(/<img\b[^>]*>/g) || [];
+  let inlined = 0;
+
+  for (const tag of tags) {
+    // Prefer the largest candidate in srcset; fall back to src.
+    // Case-insensitive on purpose: React serialises these as srcSet and
+    // sizes with capitals. A case-sensitive strip leaves srcSet in place,
+    // and the browser honours it over the src we just inlined — so every
+    // photograph silently goes back to requesting the dev server.
+    const srcset = (tag.match(/\ssrcset="([^"]*)"/i) || [])[1];
+    const src = (tag.match(/\ssrc="([^"]*)"/i) || [])[1];
+    const candidate = srcset
+      ? srcset.split(',').map((s) => s.trim().split(/\s+/)[0]).pop()
+      : src;
+    if (!candidate || candidate.startsWith('data:')) continue;
+
+    const url = candidate.replace(/&amp;/g, '&');
+    if (!imageCache.has(url)) {
+      const res = await fetch(ORIGIN + url);
+      if (!res.ok) {
+        console.log(`  WARNING image ${url.slice(0, 60)} -> ${res.status}`);
+        continue;
+      }
+      const type = res.headers.get('content-type') || 'image/webp';
+      const buf = Buffer.from(await res.arrayBuffer());
+      imageCache.set(url, `data:${type};base64,${buf.toString('base64')}`);
+    }
+
+    const replaced = tag
+      .replace(/\ssrcset="[^"]*"/gi, '')
+      .replace(/\ssizes="[^"]*"/gi, '')
+      .replace(/\ssrc="[^"]*"/i, ` src="${imageCache.get(url)}"`);
+    body = body.replace(tag, replaced);
+    inlined++;
+  }
+
+  console.log(`  inlined ${inlined} image(s)`);
+  return body;
+}
+
 console.log('building snapshot...');
 const [enHtml, arHtml] = await Promise.all([get('/en'), get('/ar')]);
 const css = await inlineCss(enHtml);
 const en = extract(enHtml, 'en');
 const ar = extract(arHtml, 'ar');
+en.body = await inlineImages(en.body);
+ar.body = await inlineImages(ar.body);
 
 /* On the real site next/font puts --font-rubik on <html>, so --font-sans
    (which is declared at :root and references it) resolves. In this snapshot
