@@ -54,18 +54,26 @@ export async function Hero() {
             phones it stays bottom-aligned and stacks, which is where the
             headline-above-figure reading order works best. */}
         <div className="grid items-end gap-0 pt-12 pb-0 sm:pt-16 lg:min-h-[min(88vh,900px)] lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:pt-20 lg:pb-20">
-          {/* ---- copy: sits in front of the athlete ---- */}
-          <div className="relative z-20">
-            <h1 className="hero-rise text-4xl leading-[0.98] font-black tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-7xl">
+          {/* ---- copy ----
+              `contents` on phones dissolves this wrapper, so the headline,
+              paragraph and buttons become grid items in their own right and
+              can be ordered around the athlete: headline, paragraph, image,
+              buttons. From lg up it is an ordinary block again and the desktop
+              layout — copy column beside the athlete — is exactly as before.
+
+              The alternative, a second copy of the buttons shown only on
+              mobile, would put the same two links in the page twice. */}
+          <div className="contents lg:relative lg:z-20 lg:block">
+            <h1 className="hero-rise order-1 text-4xl leading-[0.98] font-black tracking-tight text-balance sm:text-5xl lg:order-none lg:text-6xl xl:text-7xl">
               {t('titleLead')}
               <span className="text-[#ddb52d]">{t('titleAccent')}</span>
             </h1>
 
-            <p className="hero-rise hero-rise-2 mt-6 max-w-xl text-base leading-relaxed text-[#cdd8d0] sm:text-lg">
+            <p className="hero-rise hero-rise-2 order-2 mt-6 max-w-xl text-base leading-relaxed text-[#cdd8d0] sm:text-lg lg:order-none">
               {t('sub')}
             </p>
 
-            <div className="hero-rise hero-rise-3 mt-8 flex flex-wrap gap-3">
+            <div className="hero-rise hero-rise-3 order-4 mt-8 flex flex-wrap gap-3 lg:order-none">
               <a
                 href="#programmes"
                 className="inline-flex min-h-13 items-center justify-center rounded-full bg-[#e8711f] px-7 text-base font-bold text-[#1a0c04] transition-transform hover:scale-[1.03]"
@@ -81,11 +89,12 @@ export async function Hero() {
             </div>
           </div>
 
-          {/* ---- athlete: breaks the grid ----
-              Negative inline-start margin pulls him under the headline; the
-              bottom margin lets him run off the section edge. Both flip
-              automatically in Arabic because they are logical properties. */}
-          <div className="hero-rise hero-rise-2 relative z-10 -mt-10 flex justify-center lg:mt-0 lg:-ms-24 lg:justify-end">
+          {/* ---- athlete ----
+              On phones he sits third in the stack, between the paragraph and
+              the buttons. On desktop he returns to his own column and the
+              negative inline-start margin pulls him under the headline — a
+              logical property, so it flips on its own in Arabic. */}
+          <div className="hero-rise hero-rise-2 order-3 mt-8 flex justify-center lg:relative lg:z-10 lg:order-none lg:mt-0 lg:-ms-24 lg:justify-end">
             {/* On desktop he is sized by HEIGHT, not width. Capping the width
                 keeps a fixed pixel size whatever the window does, so on a short
                 screen he fills the row edge to edge and the breathing room
@@ -98,7 +107,7 @@ export async function Hero() {
               height={1500}
               priority
               sizes="(max-width: 1024px) 78vw, 36vw"
-              className="h-auto w-[78%] max-w-[420px] origin-bottom drop-shadow-[0_26px_50px_rgba(0,0,0,0.55)] sm:max-w-[460px] lg:h-[min(68vh,660px)] lg:w-auto lg:max-w-none"
+              className="h-auto max-h-[44vh] w-[78%] max-w-[420px] origin-bottom object-contain drop-shadow-[0_26px_50px_rgba(0,0,0,0.55)] sm:max-w-[460px] lg:h-[min(68vh,660px)] lg:max-h-none lg:w-auto lg:max-w-none"
             />
           </div>
         </div>
