@@ -73,16 +73,21 @@ export async function Hero() {
               {t('sub')}
             </p>
 
-            <div className="hero-rise hero-rise-3 order-4 mt-8 flex flex-wrap gap-3 lg:order-none">
+            {/* Centred as a group on phones, start-aligned beside the headline
+                on desktop. The horizontal padding is tighter below sm so the
+                pair actually fits on one line at phone widths — at px-7 the
+                English labels total a few pixels more than a 390px screen
+                allows, and the second button drops to its own row. */}
+            <div className="hero-rise hero-rise-3 order-4 mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 lg:order-none lg:justify-start">
               <a
                 href="#programmes"
-                className="inline-flex min-h-13 items-center justify-center rounded-full bg-[#e8711f] px-7 text-base font-bold text-[#1a0c04] transition-transform hover:scale-[1.03]"
+                className="inline-flex min-h-13 items-center justify-center rounded-full bg-[#e8711f] px-4 text-base font-bold text-[#1a0c04] transition-transform hover:scale-[1.03] sm:px-7"
               >
                 {t('ctaPrimary')}
               </a>
               <a
                 href="#contact"
-                className="inline-flex min-h-13 items-center justify-center rounded-full border-[1.5px] border-white/35 px-7 text-base font-bold text-white transition-colors hover:bg-white/10"
+                className="inline-flex min-h-13 items-center justify-center rounded-full border-[1.5px] border-white/35 px-4 text-base font-bold text-white transition-colors hover:bg-white/10 sm:px-7"
               >
                 {t('ctaSecondary')}
               </a>
