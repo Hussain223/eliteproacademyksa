@@ -94,5 +94,41 @@
     "title": "Their Journey Starts Here.",
     "body": "Give your child the space to discover, grow, and build a healthier future through sports.",
     "button": "Join Our Academy"
+  },
+  "coaches": {
+    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "title": "Meet Our Coaches",
+    "intro": "The people who guide your child on the pitch, in the pool and on the mat.",
+    "viewProfile": "View profile",
+    "empty": "Our coaching team will be introduced here soon.",
+    "emptyCta": "Ask us about our coaches"
+  },
+  "coachProfile": {
+    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "back": "All coaches",
+    "about": "About",
+    "credentials": "Qualifications",
+    "credentialsPending": "NEEDS INPUT — qualifications will be listed once the academy confirms them.",
+    "cta": "Ask about training with this coach",
+    "whatsappText": "Hello, I'd like to ask about training with one of your coaches.",
+    "loading": "Loading coach profile…",
+    "notFoundTitle": "We couldn't find that coach",
+    "notFoundBody": "The link may be out of date. You can see all our coaches on the home page.",
+    "notFoundCta": "See all coaches"
+  },
+  "events": {
+    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "title": "Events & Activities",
+    "body": "Beyond regular training, our events and activities give children the chance to put their skills into play, make new friends, and celebrate their progress with their families.",
+    "primary": "View our events",
+    "secondary": "Request a meeting",
+    "whatsappText": "Hello, I'd like to arrange a meeting with Elite Pro Academy.",
+    "imageAlt": "Children and families together at an Elite Pro Academy event"
+  },
+  "eventsPage": {
+    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "back": "Back to home",
+    "emptyTitle": "Our events gallery is on its way",
+    "emptyBody": "We're gathering photos and stories from our events and activities. Check back soon, or get in touch to hear what's coming up."
   }
 }
