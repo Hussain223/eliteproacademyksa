@@ -59,7 +59,7 @@ export async function Hero() {
           <svg
             aria-hidden="true"
             viewBox="0 0 200 200"
-            className="pointer-events-none absolute -end-16 -top-16 -z-10 w-56 text-primary-600 lg:w-72"
+            className="pointer-events-none absolute -end-14 -top-14 -z-10 w-40 text-primary-700 sm:w-56 lg:-end-16 lg:-top-16 lg:w-72 lg:text-primary-600"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -70,7 +70,7 @@ export async function Hero() {
             <circle cx="100" cy="100" r="98" />
           </svg>
 
-          <p className="hero-rise order-1 flex items-center gap-3 px-5 pt-12 text-sm font-semibold tracking-wide text-accent-300 sm:pt-16 lg:order-none lg:p-0">
+          <p className="hero-rise order-1 flex items-center gap-3 px-5 pt-10 text-sm font-semibold tracking-wide text-accent-300 sm:pt-16 lg:order-none lg:p-0">
             <span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-accent-400" />
             {brand('tagline')}
           </p>
@@ -88,7 +88,7 @@ export async function Hero() {
               appears on the primary action and nowhere else in the hero. The
               secondary action is kept but deliberately quiet — a text link, so
               there is one obvious thing to press. */}
-          <div className="hero-rise hero-rise-3 order-5 mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 pb-12 sm:pb-16 lg:order-none lg:justify-start lg:p-0 lg:pt-0">
+          <div className="hero-rise hero-rise-3 order-5 mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 pb-12 sm:pb-16 lg:order-none lg:mt-9 lg:justify-start lg:p-0">
             <a
               href="#programmes"
               className="inline-flex min-h-13 items-center justify-center rounded-full bg-attention-400 px-7 text-base font-bold text-ink-900 shadow-[0_8px_24px_rgb(232_113_31/0.28)] transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none"
@@ -107,7 +107,7 @@ export async function Hero() {
         {/* ---- stage ----
             On phones, a rounded card sitting fourth in the stack. On desktop
             it becomes the first column and runs edge to edge. */}
-        <div className="hero-rise hero-rise-2 relative order-4 mx-5 mt-9 flex items-end justify-center overflow-hidden rounded-lg bg-accent-100 pt-8 lg:order-1 lg:m-0 lg:rounded-none lg:pt-16">
+        <div className="hero-rise hero-rise-2 relative order-4 mx-5 mt-7 flex items-end justify-center overflow-hidden rounded-lg bg-accent-100 pt-6 lg:order-1 lg:m-0 lg:rounded-none lg:pt-16">
           {/* Every shape here is decoration: aria-hidden, and placed with
               start/end so the whole composition mirrors in Arabic. */}
 
@@ -156,17 +156,13 @@ export async function Hero() {
             <circle cx="60" cy="60" r="5" className="fill-accent-300" />
           </svg>
 
-          {/* Navy stripes, mid-start. */}
-          <svg
+          {/* Navy half-disc peeking in from the start edge — the template's
+              cut-circle shapes. (Not stripes: three bars read as a menu icon,
+              and people would try to tap it.) */}
+          <div
             aria-hidden="true"
-            viewBox="0 0 60 44"
-            className="absolute start-[7%] top-[52%] w-12 text-navy-700 lg:w-16"
-            fill="currentColor"
-          >
-            <rect width="60" height="8" rx="4" />
-            <rect y="18" width="60" height="8" rx="4" />
-            <rect y="36" width="60" height="8" rx="4" />
-          </svg>
+            className="absolute -start-8 top-[54%] aspect-square w-16 rounded-full bg-navy-700 lg:-start-12 lg:w-24"
+          />
 
           {/* Sized by HEIGHT on desktop, so the space above and below him
               stays roughly constant from a laptop to a large monitor. */}
@@ -177,7 +173,7 @@ export async function Hero() {
             height={1500}
             priority
             sizes="(max-width: 1024px) 80vw, 40vw"
-            className="relative h-[min(46vh,440px)] w-auto object-contain drop-shadow-[0_18px_28px_rgb(15_24_48/0.28)] lg:h-[min(72vh,660px)]"
+            className="relative h-[min(40vh,380px)] w-auto object-contain drop-shadow-[0_18px_28px_rgb(15_24_48/0.28)] lg:h-[min(72vh,660px)]"
           />
         </div>
       </div>
