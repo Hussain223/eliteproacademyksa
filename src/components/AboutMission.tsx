@@ -15,18 +15,18 @@ export async function AboutMission() {
   const t = await getTranslations('about');
 
   return (
-    <section id="about" className="scroll-mt-20 bg-[#07140d] py-18 text-white sm:py-24">
+    <section id="about" className="scroll-mt-20 bg-[#07140d] py-20 text-white sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-4xl px-5 text-center">
-        <h2 className="text-3xl font-black tracking-tight text-balance sm:text-4xl lg:text-5xl">
+        <h2 className="reveal text-3xl leading-[1.1] font-black tracking-tight text-balance sm:text-4xl lg:text-[2.75rem]">
           {t('title')}
         </h2>
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-[#cdd8d0] sm:text-lg">
+        <p className="reveal mx-auto mt-7 max-w-[62ch] text-base leading-[1.75] text-[#cdd8d0] sm:text-lg">
           {t('body')}
         </p>
         {/* A quiet gold rule, the one brand flourish this section needs. */}
         <span
           aria-hidden="true"
-          className="mx-auto mt-10 block h-px w-24 bg-accent-500"
+          className="reveal mx-auto mt-11 block h-px w-24 bg-accent-500"
         />
       </div>
     </section>

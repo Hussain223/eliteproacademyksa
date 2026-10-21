@@ -2,119 +2,179 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
 /**
- * The landing-page hero — the "Poster" direction approved on 4 Oct 2026.
+ * The landing-page hero — the split "Soccer Camp" refinement (21 Oct 2026).
  *
- * Composition: the athlete rises out of the dark backdrop and the headline
- * crosses in front of him, so type and image overlap rather than sitting in
- * tidy columns. He also bleeds off the bottom edge. Both are deliberate — the
- * figure is not meant to sit in a neat box.
+ * Composition: two halves. One is a bright, warm "stage" holding the cutout
+ * footballer in front of a gold sun-disc and a few playful pitch shapes; the
+ * other is a solid deep-green panel carrying eyebrow, headline, paragraph and
+ * the call to action. The mood comes from the Soccer Camp template Hussain
+ * shared — warm, bright, playful, trustworthy — but every colour is ours:
+ * green panel, gold accents, navy shapes, and orange on the primary CTA only.
+ *
+ * Why the stage is sand and not green: the boy wears a green kit. On a green
+ * panel he would dissolve into it. On sand he is the brightest thing on the
+ * page, which is the point.
  *
  * This section deliberately breaks the calm, restrained rules in
  * docs/design-system.md. Those govern the dashboard; the landing page is the
  * one place the brand goes visually loud. Don't "fix" this toward the
  * dashboard styling.
  *
- * MIRRORING: the athlete is offset toward the inline-END side, expressed with
- * logical properties, so in Arabic he moves to the opposite side on his own
- * and the headline still leads. There is no second layout for RTL.
+ * MIRRORING: on desktop the stage takes the first grid column and the panel
+ * the second. A grid's columns follow the page direction, so in Arabic the
+ * photo moves to the right and the panel to the left with no second layout.
+ * Decorative shapes are placed with start/end, never left/right, so they
+ * follow. The photo itself is NOT flipped — it would mirror the kit's logos.
+ *
+ * MOBILE ORDER is the approved stack: eyebrow, headline, paragraph, image,
+ * buttons. See the note on the panel wrapper for how that works.
  *
  * IMAGES ARE PLACEHOLDERS. These are AI-generated stand-ins to be replaced by
- * real academy photography (with guardian consent) before launch. Paths live
- * in one place — the constants below — so swapping them is a one-line change.
+ * real academy photography (with guardian consent) before launch. The path
+ * lives in one place — the constant below — so swapping it is a one-line
+ * change.
  */
 
-const HERO_BACKDROP = '/images/hero-bg.webp';
 const HERO_ATHLETE = '/images/hero-football-boy.webp';
 
 export async function Hero() {
   const t = await getTranslations('hero');
+  const brand = await getTranslations('brand');
 
   return (
-    <section className="relative isolate overflow-hidden bg-[#07140d] text-white">
-      {/* Backdrop. Decorative, so the alt text is deliberately empty — a screen
-          reader announcing "abstract green background" helps nobody. */}
-      <Image
-        src={HERO_BACKDROP}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        className="-z-20 object-cover"
-      />
-      {/* Darkening wash so the headline holds its contrast wherever the gold
-          streaks in the backdrop happen to fall. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-[#07140d]/92 via-[#07140d]/72 to-[#07140d]/94"
-      />
+    <section className="relative isolate overflow-hidden bg-primary-800 text-white">
+      <div className="grid lg:min-h-[min(calc(100dvh-4rem),820px)] lg:grid-cols-2">
+        {/* ---- panel ----
+            `contents` on phones dissolves this wrapper, so eyebrow, headline,
+            paragraph and buttons become grid items in their own right and the
+            stage can slot in between the paragraph and the buttons. From lg up
+            it is an ordinary block again: the second column, text centred
+            vertically.
 
-      <div className="mx-auto w-full max-w-6xl px-5">
-        {/* On desktop the row is given a height and both columns are centred in
-            it, so the text block and the athlete share one middle line. On
-            phones it stays bottom-aligned and stacks, which is where the
-            headline-above-figure reading order works best. */}
-        <div className="grid items-end gap-0 pt-12 pb-0 sm:pt-16 lg:min-h-[min(88vh,900px)] lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:pt-20 lg:pb-20">
-          {/* ---- copy ----
-              `contents` on phones dissolves this wrapper, so the headline,
-              paragraph and buttons become grid items in their own right and
-              can be ordered around the athlete: headline, paragraph, image,
-              buttons. From lg up it is an ordinary block again and the desktop
-              layout — copy column beside the athlete — is exactly as before.
+            The end padding lines the text up with the header's 72rem content
+            column even though the panel itself runs to the screen edge. */}
+        <div className="contents lg:relative lg:order-2 lg:flex lg:flex-col lg:justify-center lg:py-20 lg:ps-14 lg:pe-[max(1.25rem,calc(50vw-36rem+1.25rem))] xl:ps-20">
+          {/* Thin rings in the panel corner — the template's line pattern,
+              kept quiet so it never competes with the headline. */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 200"
+            className="pointer-events-none absolute -end-14 -top-14 -z-10 w-40 text-primary-700 sm:w-56 lg:-end-16 lg:-top-16 lg:w-72 lg:text-primary-600"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <circle cx="100" cy="100" r="40" />
+            <circle cx="100" cy="100" r="60" />
+            <circle cx="100" cy="100" r="80" />
+            <circle cx="100" cy="100" r="98" />
+          </svg>
 
-              The alternative, a second copy of the buttons shown only on
-              mobile, would put the same two links in the page twice. */}
-          <div className="contents lg:relative lg:z-20 lg:block">
-            <h1 className="hero-rise order-1 text-4xl leading-[0.98] font-black tracking-tight text-balance sm:text-5xl lg:order-none lg:text-6xl xl:text-7xl">
-              {t('titleLead')}
-              <span className="text-[#ddb52d]">{t('titleAccent')}</span>
-            </h1>
+          <p className="hero-rise order-1 flex items-center gap-3 px-5 pt-10 text-sm font-semibold tracking-wide text-accent-300 sm:pt-16 lg:order-none lg:p-0">
+            <span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-accent-400" />
+            {brand('tagline')}
+          </p>
 
-            <p className="hero-rise hero-rise-2 order-2 mt-6 max-w-xl text-base leading-relaxed text-[#cdd8d0] sm:text-lg lg:order-none">
-              {t('sub')}
-            </p>
+          <h1 className="hero-rise order-2 mt-4 px-5 text-4xl leading-[1.04] font-black tracking-tight text-balance sm:text-5xl lg:order-none lg:px-0 lg:text-[3.4rem] xl:text-6xl">
+            {t('titleLead')}
+            <span className="text-accent-300">{t('titleAccent')}</span>
+          </h1>
 
-            {/* Centred as a group on phones, start-aligned beside the headline
-                on desktop. The horizontal padding is tighter below sm so the
-                pair actually fits on one line at phone widths — at px-7 the
-                English labels total a few pixels more than a 390px screen
-                allows, and the second button drops to its own row. */}
-            <div className="hero-rise hero-rise-3 order-4 mt-8 flex flex-wrap justify-center gap-2 sm:gap-3 lg:order-none lg:justify-start">
-              <a
-                href="#programmes"
-                className="inline-flex min-h-13 items-center justify-center rounded-full bg-[#e8711f] px-4 text-base font-bold text-[#1a0c04] transition-transform hover:scale-[1.03] sm:px-7"
-              >
-                {t('ctaPrimary')}
-              </a>
-              <a
-                href="#contact"
-                className="inline-flex min-h-13 items-center justify-center rounded-full border-[1.5px] border-white/35 px-4 text-base font-bold text-white transition-colors hover:bg-white/10 sm:px-7"
-              >
-                {t('ctaSecondary')}
-              </a>
-            </div>
+          <p className="hero-rise hero-rise-2 order-3 mt-5 max-w-xl px-5 text-base leading-relaxed text-primary-100 sm:text-lg lg:order-none lg:px-0">
+            {t('sub')}
+          </p>
+
+          {/* Centred as a group on phones, start-aligned on desktop. Orange
+              appears on the primary action and nowhere else in the hero. The
+              secondary action is kept but deliberately quiet — a text link, so
+              there is one obvious thing to press. */}
+          <div className="hero-rise hero-rise-3 order-5 mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 px-5 pb-12 sm:pb-16 lg:order-none lg:mt-9 lg:justify-start lg:p-0">
+            <a
+              href="#programmes"
+              className="inline-flex min-h-13 items-center justify-center rounded-full bg-attention-400 px-7 text-base font-bold text-ink-900 shadow-[0_8px_24px_rgb(232_113_31/0.28)] transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              {t('ctaPrimary')}
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex min-h-13 items-center px-1 text-base font-semibold text-white underline decoration-accent-400 decoration-2 underline-offset-[6px] transition-colors hover:text-accent-200"
+            >
+              {t('ctaSecondary')}
+            </a>
           </div>
+        </div>
 
-          {/* ---- athlete ----
-              On phones he sits third in the stack, between the paragraph and
-              the buttons. On desktop he returns to his own column and the
-              negative inline-start margin pulls him under the headline — a
-              logical property, so it flips on its own in Arabic. */}
-          <div className="hero-rise hero-rise-2 order-3 mt-8 flex justify-center lg:relative lg:z-10 lg:order-none lg:mt-0 lg:-ms-24 lg:justify-end">
-            {/* On desktop he is sized by HEIGHT, not width. Capping the width
-                keeps a fixed pixel size whatever the window does, so on a short
-                screen he fills the row edge to edge and the breathing room
-                disappears; tying him to viewport height keeps the margin above
-                and below him roughly constant from 1280 to 1920. */}
-            <Image
-              src={HERO_ATHLETE}
-              alt={t('athleteAlt')}
-              width={1000}
-              height={1500}
-              priority
-              sizes="(max-width: 1024px) 78vw, 36vw"
-              className="h-auto max-h-[44vh] w-[78%] max-w-[420px] origin-bottom object-contain drop-shadow-[0_26px_50px_rgba(0,0,0,0.55)] sm:max-w-[460px] lg:h-[min(68vh,660px)] lg:max-h-none lg:w-auto lg:max-w-none"
-            />
-          </div>
+        {/* ---- stage ----
+            On phones, a rounded card sitting fourth in the stack. On desktop
+            it becomes the first column and runs edge to edge. */}
+        <div className="hero-rise hero-rise-2 relative order-4 mx-5 mt-7 flex items-end justify-center overflow-hidden rounded-lg bg-accent-100 pt-6 lg:order-1 lg:m-0 lg:rounded-none lg:pt-16">
+          {/* Every shape here is decoration: aria-hidden, and placed with
+              start/end so the whole composition mirrors in Arabic. */}
+
+          {/* Gold sun-disc behind the athlete. */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-[12%] mx-auto aspect-square w-[78%] max-w-[520px] rounded-full bg-accent-300"
+          />
+
+          {/* Navy concentric arcs, top-start corner. */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 200 200"
+            className="absolute -start-14 -top-14 w-36 text-navy-700 lg:-start-20 lg:-top-20 lg:w-60"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="9"
+          >
+            <circle cx="100" cy="100" r="34" />
+            <circle cx="100" cy="100" r="58" />
+            <circle cx="100" cy="100" r="82" />
+          </svg>
+
+          {/* Small green spark, top-end. */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 40 40"
+            className="absolute end-[10%] top-[9%] w-7 text-primary-500 lg:w-10"
+            fill="currentColor"
+          >
+            <path d="M20 0l4.5 15.5L40 20l-15.5 4.5L20 40l-4.5-15.5L0 20l15.5-4.5z" />
+          </svg>
+
+          {/* Navy pitch tile, bottom-end — the half-way line and centre
+              circle, the one unmistakably "football" shape in the set. */}
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 120 120"
+            className="absolute end-[6%] bottom-[8%] w-16 lg:w-24"
+          >
+            <rect width="120" height="120" rx="22" className="fill-navy-700" />
+            <g fill="none" strokeWidth="4" className="stroke-accent-300">
+              <line x1="60" y1="14" x2="60" y2="106" />
+              <circle cx="60" cy="60" r="20" />
+            </g>
+            <circle cx="60" cy="60" r="5" className="fill-accent-300" />
+          </svg>
+
+          {/* Navy half-disc peeking in from the start edge — the template's
+              cut-circle shapes. (Not stripes: three bars read as a menu icon,
+              and people would try to tap it.) */}
+          <div
+            aria-hidden="true"
+            className="absolute -start-8 top-[54%] aspect-square w-16 rounded-full bg-navy-700 lg:-start-12 lg:w-24"
+          />
+
+          {/* Sized by HEIGHT on desktop, so the space above and below him
+              stays roughly constant from a laptop to a large monitor. */}
+          <Image
+            src={HERO_ATHLETE}
+            alt={t('athleteAlt')}
+            width={1000}
+            height={1500}
+            priority
+            sizes="(max-width: 1024px) 80vw, 40vw"
+            className="relative h-[min(40vh,380px)] w-auto object-contain drop-shadow-[0_18px_28px_rgb(15_24_48/0.28)] lg:h-[min(72vh,660px)]"
+          />
         </div>
       </div>
     </section>

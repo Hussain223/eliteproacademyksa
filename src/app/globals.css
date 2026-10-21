@@ -84,6 +84,17 @@
   --color-ink-800: #3a332b;
   --color-ink-900: #241f1a;
 
+  /* --- Navy · LANDING PAGE ONLY ----------------------------------------
+     Added 21 Oct 2026 at Hussain's request for the "Soccer Camp" hero
+     refinement. The app itself keeps warm ink as its deep neutral (direction
+     C); navy is a decorative colour for the landing hero's playful shapes and
+     is not used for text or anywhere in the dashboard. Pending client
+     confirmation along with their brand hex codes.
+     MEASURED: white on navy-700 = 14.11:1, should text ever need it. */
+  --color-navy-500: #2f4a85;
+  --color-navy-700: #1b2a4e;
+  --color-navy-900: #0f1830;
+
   /* --- Attention · orange ----------------------------------------------
      ONE job: pull the eye to a single important thing — a critical alert, or
      the one call-to-action in an empty state. Never a fourth brand colour
@@ -92,6 +103,11 @@
      (4.49:1). Use it as a fill behind DARK text, or use attention-600 when
      it must be text. */
   --color-attention-50: #fdf0e7;
+  /* attention-400 is the brighter step for a CTA sitting on a DARK band (the
+     landing hero). MEASURED: ink-900 text on it = 5.30:1 (passes AA); the
+     fill against the hero's primary-800 panel = 4.10:1 (past the 3:1 a
+     control's edge needs). Never white text on it. */
+  --color-attention-400: #e8711f;
   --color-attention-500: #c2571a;
   --color-attention-600: #9c4414;
 
@@ -183,6 +199,77 @@
   :focus-visible {
     outline: 2px solid var(--color-primary-500);
     outline-offset: 2px;
+  }
+}
+
+/* ===========================================================================
+   ARABIC LETTER-SPACING OVERRIDE — deliberately unlayered.
+
+   Tailwind's tracking-* utilities live in @layer utilities, so a rule in
+   @layer base would lose to them. This one sits outside any layer on purpose,
+   which is the only way to beat a utility without !important.
+
+   Why it exists: tight negative tracking is a Latin display convention. Arabic
+   letterforms JOIN, and squeezing them degrades the connections and hurts
+   legibility. The headings carry tracking-tight for English; Arabic resets to
+   normal. Design guidance written for Latin type will not tell you this —
+   docs/design-system.md calling Arabic legibility a first-class requirement
+   will.
+   =========================================================================== */
+:lang(ar) :is(h1, h2, h3, h4) {
+  letter-spacing: normal;
+}
+
+/* ===========================================================================
+   SCROLL REVEAL
+
+   CSS scroll-driven animation rather than a JavaScript library: no dependency,
+   no client component, nothing to clean up, and it cannot leave content stuck
+   invisible if the script fails.
+
+   Guarded twice. @supports means browsers without scroll-driven animations
+   (Safari, Firefox today) simply render everything visible rather than running
+   the keyframes on a time-based clock. The reduced-motion query means anyone
+   who asked their system for less movement gets none.
+
+   The range starts after the element has entered, so anything already on
+   screen at load — the hero, the first section — is painted in its final
+   state. Nothing waits on a scroll that may never happen.
+
+   translateY only: a horizontal slide would need mirroring in Arabic, and a
+   vertical one reads identically in both directions.
+   =========================================================================== */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 26%;
+    }
+  }
+}
+
+/* A scroll-linked animation is CONTINUOUS, not a one-shot trigger: anything
+   outside the viewport genuinely sits at opacity 0. On screen that is exactly
+   right, but it means a printed page or a PDF export would come out with blank
+   sections, because printing lays the whole document out at once with no
+   scroll position. Switch it off for print. */
+@media print {
+  .reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

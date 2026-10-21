@@ -97,7 +97,10 @@ async function inlineImages(body) {
 
     const url = candidate.replace(/&amp;/g, '&');
     if (!imageCache.has(url)) {
-      const res = await fetch(ORIGIN + url);
+      // Ask for WebP explicitly. With no Accept header /_next/image falls
+      // back to JPEG, which has no transparency — every cutout athlete then
+      // arrives on a solid black rectangle.
+      const res = await fetch(ORIGIN + url, { headers: { Accept: 'image/webp,*/*' } });
       if (!res.ok) {
         console.log(`  WARNING image ${url.slice(0, 60)} -> ${res.status}`);
         continue;

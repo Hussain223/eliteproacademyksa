@@ -78,7 +78,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="bg-[#07140d] text-white">
-      <div className="mx-auto w-full max-w-6xl px-5 py-14">
+      <div className="mx-auto w-full max-w-6xl px-5 py-16">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           {/* brand */}
           <div className="flex items-center gap-3">
@@ -130,7 +130,7 @@ export async function SiteFooter() {
                 <a
                   href={s.href}
                   aria-label={s.label}
-                  className="flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-accent-400 hover:text-accent-300"
+                  className="flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/25 text-white transition-[color,border-color,transform] duration-200 ease-out hover:border-accent-400 hover:text-accent-300 active:scale-[0.94] motion-reduce:transform-none motion-reduce:transition-none"
                 >
                   <SocialIcon name={s.key} />
                 </a>

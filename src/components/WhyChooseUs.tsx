@@ -19,15 +19,20 @@ export async function WhyChooseUs() {
   const t = await getTranslations('why');
 
   return (
-    <section id="why" className="scroll-mt-20 bg-bg py-16 sm:py-20 lg:py-24">
+    <section id="why" className="scroll-mt-20 bg-bg py-20 sm:py-24 lg:py-28">
       <div className="mx-auto w-full max-w-6xl px-5">
-        <ul className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:gap-x-16">
+        <ul className="grid gap-x-12 gap-y-12 sm:grid-cols-2 lg:gap-x-20 lg:gap-y-14">
           {ITEMS.map((key) => (
-            <li key={key} className="border-s-2 border-accent-500 ps-5 sm:ps-6">
-              <h3 className="text-xl font-bold tracking-tight text-ink-900 text-balance sm:text-2xl">
+            <li
+              key={key}
+              className="reveal border-s-[3px] border-accent-500/70 ps-6 sm:ps-7"
+            >
+              <h3 className="text-xl leading-[1.15] font-bold tracking-tight text-ink-900 text-balance sm:text-2xl">
                 {t(`${key}.title`)}
               </h3>
-              <p className="mt-3 max-w-prose text-ink-600">{t(`${key}.body`)}</p>
+              <p className="mt-3.5 max-w-[60ch] leading-relaxed text-ink-600">
+                {t(`${key}.body`)}
+              </p>
             </li>
           ))}
         </ul>
