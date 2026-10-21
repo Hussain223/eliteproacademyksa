@@ -43,7 +43,7 @@ export async function Coaches() {
       <svg
         aria-hidden="true"
         viewBox="0 0 200 200"
-        className="pointer-events-none absolute -start-24 -top-24 -z-10 w-72 text-accent-200"
+        className="pointer-events-none absolute -end-24 -top-24 -z-10 w-72 text-accent-200"
         fill="none"
         stroke="currentColor"
         strokeWidth="6"

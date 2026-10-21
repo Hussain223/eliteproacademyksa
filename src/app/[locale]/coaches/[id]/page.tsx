@@ -23,7 +23,10 @@ import { whatsappUrl } from '@/lib/whatsapp';
  *   loading   — loading.tsx beside this file (shown while moving here from
  *               another page on a slow connection).
  *   not found — an unknown id calls notFound(), which renders not-found.tsx
- *               beside this file: a friendly page with a way back.
+ *               beside this file: a friendly page with a way back. It is
+ *               served with noindex; the status code reads 200, not 404,
+ *               because loading.tsx makes the response stream — documented
+ *               Next.js behaviour, and harmless since search engines skip it.
  *   pending   — qualifications are null until the academy confirms them
  *               ([NEEDS INPUT]); a clearly marked placeholder holds their place.
  *

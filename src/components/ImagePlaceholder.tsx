@@ -38,7 +38,9 @@ export function ImagePlaceholder({
           <circle cx="8.5" cy="9.5" r="1.6" />
           <path d="M21 16l-5-5-5 5-2-2-6 6" />
         </svg>
-        <span className="font-mono text-xs tracking-wide tabular-nums">
+        {/* dir="ltr": "1000 × 1250" is width × height in every language. Left to
+            the page direction, Arabic would show it as "1250 × 1000". */}
+        <span dir="ltr" className="font-mono text-xs tracking-wide tabular-nums">
           {recommended}
         </span>
       </div>
