@@ -88,8 +88,8 @@
      Added 21 Oct 2026 at Hussain's request for the "Soccer Camp" hero
      refinement. The app itself keeps warm ink as its deep neutral (direction
      C); navy is a decorative colour for the landing hero's playful shapes and
-     is not used for text or anywhere in the dashboard. Pending client
-     confirmation along with their brand hex codes.
+     is not used for text or anywhere in the dashboard. Confirmed by the
+     client on 22 Oct 2026.
      MEASURED: white on navy-700 = 14.11:1, should text ever need it. */
   --color-navy-500: #2f4a85;
   --color-navy-700: #1b2a4e;

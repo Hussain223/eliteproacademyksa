@@ -58,7 +58,7 @@
     "football": {
       "name": "Football",
       "body": "Building teamwork, coordination, and confidence through the beautiful game.",
-      "alt": "A child playing football at the academy"
+      "alt": "A smiling boy in a green and gold football kit dribbling a ball"
     },
     "swimming": {
       "name": "Swimming",
@@ -68,7 +68,7 @@
     "gymnastics": {
       "name": "Gymnastics",
       "body": "Growing strength, balance, flexibility, and body awareness through movement.",
-      "alt": "A girl in a green and gold leotard holding a balanced gymnastics pose"
+      "alt": "A smiling girl in a green and gold leotard holding one leg high in a balance"
     },
     "martialArts": {
       "name": "Martial Arts",
@@ -78,12 +78,12 @@
     "nutrition": {
       "name": "Nutrition & Wellness",
       "body": "Supporting healthier habits through nutritional guidance and wellness programs.",
-      "alt": "A child learning about healthy food at the academy"
+      "alt": "A smiling boy in a green and gold kit eating fresh fruit and vegetables"
     },
     "obesity": {
       "name": "Obesity Solutions",
       "body": "Providing specialised support to help children work towards healthier, more active lifestyles.",
-      "alt": "A coach supporting a child through a gentle exercise session"
+      "alt": "A boy in a green and gold tracksuit jumping for joy"
     }
   },
   "about": {
