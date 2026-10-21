@@ -33,6 +33,21 @@ CSS:
 | `attention-500` (orange) | 4.25:1 ✗ | 4.49:1 ✗ | Fill behind dark text, or `attention-600` for text. |
 | `ink-400` | 3.06:1 ✗ | — | Borders and disabled states only, never readable text. |
 
+**Landing hero — "Soccer Camp" refinement, approved by Hussain 21 Oct 2026.**
+Split hero: a sand "stage" with the cutout athlete on one side, a solid
+`primary-800` panel with the copy on the other; they swap sides in Arabic. Four
+decisions came with it:
+
+- **Navy (`navy-*`) is a landing-page-only decorative colour** — shapes in the
+  hero, never text, never the dashboard. Warm ink stays the deep neutral
+  everywhere else. To confirm with the client alongside their brand hex codes.
+- **The eyebrow above the headline is the brand tagline**, reused rather than
+  new copy.
+- **One button, one link.** "Explore Programs" is the only button; "Get in
+  Touch" is a quiet underlined link.
+- **`attention-400` (brighter orange)** is for a CTA on a dark band, with dark
+  text (5.30:1). Orange appears on the primary CTA and nowhere else in the hero.
+
 **Still outstanding:** the real logo as a vector, and the academy's own brand hex
 codes. When they arrive the *values* move to match; the *token names* do not
 change, so nothing built on top needs rewriting.
