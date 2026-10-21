@@ -26,10 +26,14 @@ const OUT = 'public/images';
 /**
  * cutout: the subject is lifted off its studio backdrop (see scripts/cutout.mjs).
  * photo:  kept whole, background and all — a framed photograph, not a subject.
+ * ready:  already delivered on a transparent background, so only resized.
  */
 const JOBS = [
   { in: 'football-boy.png', out: 'hero-football-boy.webp', mode: 'cutout', maxHeight: 1500, quality: 90 },
-  { in: 'gymnast-girl.png', out: 'gymnast-girl.webp', mode: 'cutout', maxHeight: 1000, quality: 88 },
+  { in: 'program-gymnastics.png', out: 'gymnastics-girl.webp', mode: 'ready', maxHeight: 1000, quality: 88 },
+  { in: 'program-football.png', out: 'football-boy.webp', mode: 'ready', maxHeight: 1000, quality: 88 },
+  { in: 'program-obesity-solutions.png', out: 'jumping-boy.webp', mode: 'ready', maxHeight: 1000, quality: 88 },
+  { in: 'program-nutrition.png', out: 'nutrition-boy.webp', mode: 'photo', maxWidth: 1000, quality: 84 },
   { in: 'karate-boy.png', out: 'karate-boy.webp', mode: 'cutout', maxHeight: 1000, quality: 88 },
   { in: 'hero-bg.png', out: 'hero-bg.webp', mode: 'photo', maxWidth: 1920, quality: 78 },
   { in: 'swimmer-boy.png', out: 'swimmer-boy.webp', mode: 'photo', maxWidth: 1000, quality: 84 },

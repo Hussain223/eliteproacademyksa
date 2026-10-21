@@ -1,15 +1,13 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 
-import { ImagePlaceholder } from './ImagePlaceholder';
-
 /**
  * Section 3 of the copy file — the intro line and the six programmes.
  *
  * IMAGE SLOTS ARE SQUARE (1:1), recommended source 1200 × 1200.
  *
- * Square is the compromise that suits what we have: the swimmer is already a
- * square photograph, and the two cut-out figures are portrait, so they stand
+ * Square is the compromise that suits what we have: the swimmer and nutrition
+ * shots are square photographs, and the cut-out figures are portrait, so they stand
  * full-height on the tinted panel. A landscape slot would have suited none of
  * the three.
  *
@@ -26,27 +24,18 @@ import { ImagePlaceholder } from './ImagePlaceholder';
  * lazy-loads them by default and they do not compete with the hero.
  */
 
-type Slot =
-  | { kind: 'photo' | 'cutout'; src: string }
-  | { kind: 'todo'; needs: string };
+type Slot = { kind: 'photo' | 'cutout'; src: string };
 
 const PROGRAMS: { key: string; slot: Slot }[] = [
-  // TODO(image): football — a child mid-play with a ball on the pitch, plain
-  // studio background for a clean cut-out. 1200 × 1200.
-  { key: 'football', slot: { kind: 'todo', needs: '1200 × 1200' } },
-
+  { key: 'football', slot: { kind: 'cutout', src: '/images/football-boy.webp' } },
   { key: 'swimming', slot: { kind: 'photo', src: '/images/swimmer-boy.webp' } },
-  { key: 'gymnastics', slot: { kind: 'cutout', src: '/images/gymnast-girl.webp' } },
+  { key: 'gymnastics', slot: { kind: 'cutout', src: '/images/gymnastics-girl.webp' } },
   { key: 'martialArts', slot: { kind: 'cutout', src: '/images/karate-boy.webp' } },
+  { key: 'nutrition', slot: { kind: 'photo', src: '/images/nutrition-boy.webp' } },
 
-  // TODO(image): nutrition & wellness — a child with healthy food, or a coach
-  // talking a child through a meal plan. 1200 × 1200.
-  { key: 'nutrition', slot: { kind: 'todo', needs: '1200 × 1200' } },
-
-  // TODO(image): obesity solutions — a coach supporting a child through gentle
-  // exercise. Must read as encouraging and dignified, never as a "before"
-  // picture; this is the one image where the wrong shot does real harm.
-  { key: 'obesity', slot: { kind: 'todo', needs: '1200 × 1200' } },
+  // Obesity solutions: a child jumping for joy — active and encouraging, never
+  // a "before" picture. This is the one slot where the wrong shot does harm.
+  { key: 'obesity', slot: { kind: 'cutout', src: '/images/jumping-boy.webp' } },
 ];
 
 export async function Programs() {
@@ -82,22 +71,18 @@ export async function Programs() {
                     className="absolute inset-x-0 top-[14%] -z-10 mx-auto aspect-square w-[74%] rounded-full bg-accent-300"
                   />
                 )}
-                {slot.kind === 'todo' ? (
-                  <ImagePlaceholder recommended={slot.needs} className="h-full w-full" />
-                ) : (
-                  <Image
-                    src={slot.src}
-                    alt={t(`${key}.alt`)}
-                    fill
-                    loading="lazy"
-                    sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 360px"
-                    className={
-                      slot.kind === 'photo'
-                        ? 'object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transform-none'
-                        : 'object-contain object-bottom p-2 transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transform-none'
-                    }
-                  />
-                )}
+                <Image
+                  src={slot.src}
+                  alt={t(`${key}.alt`)}
+                  fill
+                  loading="lazy"
+                  sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 360px"
+                  className={
+                    slot.kind === 'photo'
+                      ? 'object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transform-none'
+                      : 'object-contain object-bottom p-2 transition-transform duration-500 ease-out group-hover:scale-[1.03] motion-reduce:transform-none'
+                  }
+                />
               </div>
 
               <div className="flex flex-1 flex-col p-6">

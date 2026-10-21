@@ -40,7 +40,7 @@ decisions came with it:
 
 - **Navy (`navy-*`) is a landing-page-only decorative colour** — shapes in the
   hero, never text, never the dashboard. Warm ink stays the deep neutral
-  everywhere else. To confirm with the client alongside their brand hex codes.
+  everywhere else. **Confirmed by the client, 22 Oct 2026.**
 - **The eyebrow above the headline is the brand tagline**, reused rather than
   new copy.
 - **One button, one link.** "Explore Programs" is the only button; "Get in
