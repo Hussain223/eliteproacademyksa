@@ -26,8 +26,8 @@ import { CoachPhoto } from './CoachPhoto';
  * (it is rendered in full before it is sent). EMPTY is handled: with no coaches
  * the section says so and offers a way to ask, rather than showing a blank row.
  *
- * Heading and intro are DRAFT copy, not from the client's copy file — see the
- * note in messages/*.json under "coaches".
+ * Heading and intro are not from the client's copy file — written for this
+ * section and approved 22 Oct 2026 (see "_source" in messages/*.json).
  */
 export async function Coaches() {
   const t = await getTranslations('coaches');

@@ -10,6 +10,10 @@ import { LanguageSwitcher } from './LanguageSwitcher';
  * "Sign in" points at the portal section rather than a dead route. A link that
  * goes nowhere is worse than one that explains itself.
  *
+ * The section links show from lg (1024px) up. With five of them, at tablet
+ * width they push the language switch onto a second row and the sticky header
+ * doubles in height; below lg the header is logo + language, as on phones.
+ *
  * Links carry the home path as well as the section (/en#programs, not just
  * #programs), so they also work from the coach and events pages. On the home
  * page itself the browser just scrolls.
@@ -33,8 +37,8 @@ export function SiteHeader() {
           </span>
         </a>
 
-        <nav aria-label={t('menu')} className="hidden items-center gap-1 md:flex">
-          {(['programs', 'about', 'contact'] as const).map((key) => (
+        <nav aria-label={t('menu')} className="hidden items-center gap-1 lg:flex">
+          {(['programs', 'coaches', 'events', 'about', 'contact'] as const).map((key) => (
             <a
               key={key}
               href={`${home}#${key}`}

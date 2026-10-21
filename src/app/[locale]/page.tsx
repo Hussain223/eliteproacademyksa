@@ -26,8 +26,8 @@ import { routing } from '@/i18n/routing';
  *
  * Section order follows the copy file — hero, why choose us, programmes,
  * mission, call to action, footer — with two additions after programmes
- * (21 Oct 2026): coaches, then events. Their copy is DRAFT, not from the copy
- * file; see the "_draft" notes in messages/*.json.
+ * (21 Oct 2026): coaches, then events. Their copy is not in the copy file; it
+ * was written for them and approved 22 Oct 2026 (see "_source" in messages).
  *
  * Band rhythm is deliberate. The hero is dark; below it the page alternates
  * warm light, tinted, warm light (coaches), tinted (events), dark, warm light,

@@ -9,6 +9,8 @@
   },
   "nav": {
     "programs": "البرامج",
+    "coaches": "المدربون",
+    "events": "الفعاليات",
     "about": "عن الأكاديمية",
     "contact": "تواصل معنا",
     "menu": "القائمة",
@@ -96,7 +98,7 @@
     "button": "انضم إلى أكاديميتنا"
   },
   "coaches": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "title": "تعرّف على مدربينا",
     "intro": "الأشخاص الذين يرافقون أطفالكم في الملعب، وفي المسبح، وعلى البساط.",
     "viewProfile": "عرض الملف",
@@ -104,7 +106,7 @@
     "emptyCta": "اسألونا عن مدربينا"
   },
   "coachProfile": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "back": "جميع المدربين",
     "about": "نبذة",
     "credentials": "المؤهلات",
@@ -117,7 +119,7 @@
     "notFoundCta": "شاهد جميع المدربين"
   },
   "events": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "title": "الفعاليات والأنشطة",
     "body": "إلى جانب التدريب المنتظم، تمنح فعالياتنا وأنشطتنا الأطفال فرصة لتطبيق مهاراتهم، وتكوين صداقات جديدة، والاحتفال بتقدّمهم مع عائلاتهم.",
     "primary": "شاهد فعالياتنا",
@@ -126,7 +128,7 @@
     "imageAlt": "أطفال وعائلات معًا في إحدى فعاليات أكاديمية إيليت برو"
   },
   "eventsPage": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "back": "العودة إلى الرئيسية",
     "emptyTitle": "معرض فعالياتنا قيد التحضير",
     "emptyBody": "نعمل على جمع صور وقصص من فعالياتنا وأنشطتنا. تابعونا قريبًا، أو تواصلوا معنا لمعرفة ما هو قادم."

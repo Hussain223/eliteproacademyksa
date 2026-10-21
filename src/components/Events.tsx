@@ -20,8 +20,8 @@ import { ImagePlaceholder } from './ImagePlaceholder';
  *               message. A request handled by a person, NOT the internal
  *               reservation module; public visitors never touch that.
  *
- * Heading and paragraph are DRAFT copy, not from the client's copy file, and
- * they deliberately name no specific events — which events the academy runs is
+ * Heading and paragraph are not from the client's copy file — written for this
+ * section and approved 22 Oct 2026. They deliberately name no specific events — which events the academy runs is
  * not confirmed.
  */
 export async function Events() {

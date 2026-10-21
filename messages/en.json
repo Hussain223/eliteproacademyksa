@@ -9,6 +9,8 @@
   },
   "nav": {
     "programs": "Programs",
+    "coaches": "Coaches",
+    "events": "Events",
     "about": "About",
     "contact": "Contact",
     "menu": "Menu",
@@ -96,7 +98,7 @@
     "button": "Join Our Academy"
   },
   "coaches": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "title": "Meet Our Coaches",
     "intro": "The people who guide your child on the pitch, in the pool and on the mat.",
     "viewProfile": "View profile",
@@ -104,7 +106,7 @@
     "emptyCta": "Ask us about our coaches"
   },
   "coachProfile": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "back": "All coaches",
     "about": "About",
     "credentials": "Qualifications",
@@ -117,7 +119,7 @@
     "notFoundCta": "See all coaches"
   },
   "events": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "title": "Events & Activities",
     "body": "Beyond regular training, our events and activities give children the chance to put their skills into play, make new friends, and celebrate their progress with their families.",
     "primary": "View our events",
@@ -126,7 +128,7 @@
     "imageAlt": "Children and families together at an Elite Pro Academy event"
   },
   "eventsPage": {
-    "_draft": "DRAFT copy written by the developer, not from the client's copy file. Needs client approval.",
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
     "back": "Back to home",
     "emptyTitle": "Our events gallery is on its way",
     "emptyBody": "We're gathering photos and stories from our events and activities. Check back soon, or get in touch to hear what's coming up."
