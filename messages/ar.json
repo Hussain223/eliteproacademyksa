@@ -9,6 +9,8 @@
   },
   "nav": {
     "programs": "البرامج",
+    "coaches": "المدربون",
+    "events": "الفعاليات",
     "about": "عن الأكاديمية",
     "contact": "تواصل معنا",
     "menu": "القائمة",
@@ -94,5 +96,41 @@
     "title": "رحلتهم تبدأ من هنا",
     "body": "امنح طفلك الفرصة لاكتشاف شغفه، وتنمية مهاراته، وبناء مستقبل أكثر صحة ونشاطًا من خلال الرياضة.",
     "button": "انضم إلى أكاديميتنا"
+  },
+  "coaches": {
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
+    "title": "تعرّف على مدربينا",
+    "intro": "الأشخاص الذين يرافقون أطفالكم في الملعب، وفي المسبح، وعلى البساط.",
+    "viewProfile": "عرض الملف",
+    "empty": "سنعرّفكم بفريق مدربينا هنا قريبًا.",
+    "emptyCta": "اسألونا عن مدربينا"
+  },
+  "coachProfile": {
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
+    "back": "جميع المدربين",
+    "about": "نبذة",
+    "credentials": "المؤهلات",
+    "credentialsPending": "بانتظار المعلومات — ستُدرج المؤهلات بعد تأكيدها من الأكاديمية.",
+    "cta": "اسأل عن التدريب مع هذا المدرب",
+    "whatsappText": "مرحبًا، أودّ الاستفسار عن التدريب مع أحد مدربيكم.",
+    "loading": "جارٍ تحميل ملف المدرب…",
+    "notFoundTitle": "لم نتمكن من العثور على هذا المدرب",
+    "notFoundBody": "ربما يكون الرابط قديمًا. يمكنكم مشاهدة جميع مدربينا في الصفحة الرئيسية.",
+    "notFoundCta": "شاهد جميع المدربين"
+  },
+  "events": {
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
+    "title": "الفعاليات والأنشطة",
+    "body": "إلى جانب التدريب المنتظم، تمنح فعالياتنا وأنشطتنا الأطفال فرصة لتطبيق مهاراتهم، وتكوين صداقات جديدة، والاحتفال بتقدّمهم مع عائلاتهم.",
+    "primary": "شاهد فعالياتنا",
+    "secondary": "اطلب موعدًا",
+    "whatsappText": "مرحبًا، أودّ ترتيب موعد مع أكاديمية إيليت برو.",
+    "imageAlt": "أطفال وعائلات معًا في إحدى فعاليات أكاديمية إيليت برو"
+  },
+  "eventsPage": {
+    "_source": "Not from the client copy file: written by the developer and approved 22 Oct 2026.",
+    "back": "العودة إلى الرئيسية",
+    "emptyTitle": "معرض فعالياتنا قيد التحضير",
+    "emptyBody": "نعمل على جمع صور وقصص من فعالياتنا وأنشطتنا. تابعونا قريبًا، أو تواصلوا معنا لمعرفة ما هو قادم."
   }
 }

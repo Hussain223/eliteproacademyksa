@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { AboutMission } from '@/components/AboutMission';
+import { Coaches } from '@/components/Coaches';
+import { Events } from '@/components/Events';
 import { Hero } from '@/components/Hero';
 import { JoinCta } from '@/components/JoinCta';
 import { Programs } from '@/components/Programs';
@@ -22,13 +24,15 @@ import { routing } from '@/i18n/routing';
  * programme or an ambition, and the rest — appear nowhere on this page. They
  * are open questions for the client, not gaps to fill with plausible text.
  *
- * Section order follows the copy file: hero, why choose us, programmes,
- * mission, call to action, footer.
+ * Section order follows the copy file — hero, why choose us, programmes,
+ * mission, call to action, footer — with two additions after programmes
+ * (21 Oct 2026): coaches, then events. Their copy is not in the copy file; it
+ * was written for them and approved 22 Oct 2026 (see "_source" in messages).
  *
  * Band rhythm is deliberate. The hero is dark; below it the page alternates
- * warm light, tinted, dark, warm light, dark footer — so the mission statement
- * ties back to the hero's palette without making the whole page dark and hard
- * to read.
+ * warm light, tinted, warm light (coaches), tinted (events), dark, warm light,
+ * dark footer — so the mission statement ties back to the hero's palette
+ * without making the whole page dark and hard to read.
  */
 
 export async function generateMetadata({
@@ -64,6 +68,8 @@ export default async function LandingPage({
         <Hero />
         <WhyChooseUs />
         <Programs />
+        <Coaches />
+        <Events />
         <AboutMission />
         <JoinCta />
       </main>
